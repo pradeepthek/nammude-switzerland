@@ -291,7 +291,7 @@ async function loadSubmissions() {
 
   try {
     const url = `${APPS_SCRIPT_URL}?action=getPending&password=${encodeURIComponent(PASSWORD)}`;
-    const res  = await fetch(url);
+    const res  = await fetch(url, { redirect: "follow" });
     const data = await res.json();
 
     if (!data.ok) {
@@ -402,7 +402,7 @@ async function approve(id, btn) {
 
   try {
     const url = `${APPS_SCRIPT_URL}?action=approve&password=${encodeURIComponent(PASSWORD)}&id=${encodeURIComponent(id)}`;
-    const res  = await fetch(url);
+    const res  = await fetch(url, { redirect: "follow" });
     const data = await res.json();
 
     if (!data.ok) throw new Error(data.error);
@@ -442,7 +442,7 @@ async function confirmReject() {
 
   try {
     const url = `${APPS_SCRIPT_URL}?action=reject&password=${encodeURIComponent(PASSWORD)}&id=${encodeURIComponent(REJECT_ID)}&reason=${encodeURIComponent(reason)}`;
-    const res  = await fetch(url);
+    const res  = await fetch(url, { redirect: "follow" });
     const data = await res.json();
 
     if (!data.ok) throw new Error(data.error);
