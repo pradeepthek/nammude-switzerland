@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events Calendar — Nammude Switzerland</title>
+<meta name="description" content="Community events calendar for Malayalees across Switzerland. Find cultural, sports, religious and community events near you.">
+<meta name="keywords" content="Malayalee events Switzerland, Kerala events Zurich, Indian community events Switzerland, Onam Switzerland, Malayalam events">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Events Calendar — Nammude Switzerland">
+<meta property="og:description" content="Community events calendar for Malayalees across Switzerland.">
+<meta property="og:image" content="logo.png">
+<meta property="og:site_name" content="Nammude Switzerland">
+<meta property="og:url" content="https://nammude-switzerland.netlify.app/malayalee-ch-events.html">
+<link rel="canonical" href="https://nammude-switzerland.netlify.app/malayalee-ch-events.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Events Calendar — Nammude Switzerland">
+<meta name="twitter:description" content="Community events calendar for Malayalees across Switzerland.">
+<meta name="twitter:image" content="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LV0D0EJVS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9LV0D0EJVS');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+<style>
+:root {
+  --green:        #1a6b4a;
+  --green-mid:    #2d9b6a;
+  --green-light:  #e8f5ee;
+  --green-pale:   #f2faf6;
+  --gold:         #c8922a;
+  --gold-light:   #fdf3e2;
+  --purple:       #6c3483;
+  --purple-light: #f2eaf8;
+  --blue:         #1a5276;
+  --blue-light:   #e8f0f8;
+  --red:          #c0392b;
+  --red-light:    #fdecea;
+  --gray:         #5a5a5a;
+  --gray-light:   #f4f4f2;
+  --cream:        #fdfaf5;
+  --warm-white:   #fffef9;
+  --border:       #e4e0d8;
+  --text:         #1c1c1a;
+  --text-muted:   #6b6860;
+  --text-light:   #9a9790;
+  --serif:        'Lora', Georgia, serif;
+  --sans:         'Nunito', system-ui, sans-serif;
+  --radius:       10px;
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.07);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+/* Page hero */
+.page-hero {
+  background: var(--green);
+  color: #fff;
+  padding: 2rem 1.5rem 2.5rem;
+  border-bottom: 3px solid var(--gold);
+}
+.hero-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.page-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.page-hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+}
+
+/* Stats row */
+.stats-row {
+  background: var(--warm-white);
+  border-bottom: 1px solid var(--border);
+}
+.stats-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  divide: horizontal;
+}
+.stat-box {
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--green);
+  line-height: 1;
+}
+.stat-l {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Main layout */
+.main-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Sidebar filters */
+.sidebar {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  position: sticky;
+  top: 1rem;
+}
+.sidebar h2 {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.filter-group {
+  margin-bottom: 1.25rem;
+}
+.filter-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: block;
+}
+.filter-group select,
+.filter-group input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.filter-group select:focus,
+.filter-group input[type="text"]:focus {
+  border-color: var(--green);
+}
+.filter-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b68' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+.reset-btn {
+  width: 100%;
+  padding: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition: all 0.15s;
+}
+.reset-btn:hover { border-color: var(--green); color: var(--green); }
+
+/* Submit button in sidebar */
+.submit-cta {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.submit-cta-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--warm-white);
+  background: var(--green);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.submit-cta-btn:hover { background: var(--green-mid); }
+.submit-cta p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Events list */
+.events-area {}
+.events-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.events-header h2 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+}
+.count-badge {
+  font-size: 13px;
+  color: var(--text-muted);
+  background: var(--gray-light);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.month-group { margin-bottom: 2rem; }
+.month-heading {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--green);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--green-light);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.month-count {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Event card */
+.event-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 1rem;
+  margin-bottom: 6px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.event-card:hover {
+  border-color: #b8d4c4;
+  box-shadow: 0 2px 8px rgba(26,107,74,0.06);
+}
+.event-card.private-card { border-left: 3px solid var(--gold); }
+.event-card.members-card { border-left: 3px solid var(--purple); }
+
+.date-box {
+  text-align: center;
+  background: var(--green-light);
+  border-radius: 7px;
+  padding: 4px 3px;
+  flex-shrink: 0;
+}
+.date-day {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--green);
+  line-height: 1;
+}
+.date-dow {
+  font-size: 10px;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+  opacity: 0.75;
+}
+
+.event-body { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.event-main { flex: 1; min-width: 0; }
+.event-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.event-org {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.event-venue {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+.event-venue svg { opacity: 0.5; flex-shrink: 0; }
+.event-multiday {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 500;
+}
+.badges { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; flex-shrink: 0; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.b-holiday   { background: var(--green-light);    color: var(--green); }
+.b-community { background: var(--green-light);  color: var(--green); }
+.b-cultural  { background: var(--purple-light); color: var(--purple); }
+.b-religious { background: var(--gold-light);   color: var(--gold); }
+.b-sports    { background: var(--blue-light);   color: var(--blue); }
+.b-information { background: var(--gray-light); color: var(--gray); }
+.b-public    { background: #e8f5ee; color: #1a6b4a; }
+.b-members   { background: #f2eaf8; color: #6c3483; }
+.b-private   { background: #fdf3e2; color: #c8922a; }
+.b-govt      { background: #e8f0f8; color: #1a5276; }
+.b-multiday  { background: #fff3cd; color: #856404; }
+
+/* Past events toggle */
+.past-toggle-wrap {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.past-toggle-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.past-toggle-btn:hover { border-color: var(--green); color: var(--green); }
+.past-event-card { opacity: 0.45; }
+.past-event-card:hover { opacity: 0.8; }
+
+/* Loading & error states */
+.loading-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+.loading-spinner {
+  width: 28px; height: 28px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.error-state {
+  background: var(--green-light);
+  border: 1px solid #f5c6c2;
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  font-size: 14px;
+  color: var(--green);
+  line-height: 1.6;
+}
+.last-updated {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+.no-results p { font-size: 15px; margin-bottom: 8px; }
+.no-results small { font-size: 13px; }
+
+/* ─── Submit Modal ─── */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 100;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+.modal-backdrop.open { display: flex; align-items: flex-start; justify-content: center; }
+.modal {
+  background: var(--warm-white);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  padding: 2rem;
+  margin: auto;
+  position: relative;
+}
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.modal-header h2 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 20px;
+  padding: 4px;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--text); }
+.form-row { margin-bottom: 1rem; }
+.form-row label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 9px 12px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus { border-color: var(--green); }
+.form-row textarea { height: 80px; resize: none; }
+.form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+.conflict-alert {
+  background: #fff3cd;
+  border: 2px solid var(--gold);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 1rem;
+  display: none;
+  line-height: 1.6;
+  animation: fadeUp 0.2s ease;
+}
+.conflict-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #7a5a10;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.conflict-alert-icon {
+  width: 22px; height: 22px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.conflict-event-item {
+  background: rgba(200,146,42,0.12);
+  border: 1px solid rgba(200,146,42,0.3);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.conflict-event-item:last-child { margin-bottom: 0; }
+.conflict-event-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.conflict-event-name { font-weight: 600; color: var(--text); font-size: 13px; }
+.conflict-event-org  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+.conflict-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(200,146,42,0.25);
+  font-size: 12px;
+  color: #7a5a10;
+}
+.conflict-alert strong { font-weight: 600; }
+.submit-form-btn {
+  width: 100%;
+  padding: 12px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--warm-white);
+  background: var(--green);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 0.5rem;
+}
+.submit-form-btn:hover { background: var(--green-mid); }
+.success-banner {
+  background: var(--green-light);
+  border: 1px solid #b8d4c4;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--green);
+  text-align: center;
+  display: none;
+  line-height: 1.6;
+}
+
+/* Private event info box */
+.private-note {
+  background: var(--gold-light);
+  border: 1px solid #f0c97a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #7a5a10;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Footer */
+.site-footer {
+  background: #0f3d2a;
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+}
+.site-footer strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+/* Responsive */
+@media (max-width: 720px) {
+  /* Nav */
+  .nav-links { display: none; }
+  .nav-brand-sub { display: none; }
+  .nav-cta { padding: 6px 12px; font-size: 12px; }
+
+  /* Hero */
+  .page-hero { padding: 1.5rem 1rem 2rem; }
+  .hero-inner { padding: 0; }
+
+  /* Stats — 2x2 grid */
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-box:nth-child(2) { border-right: none; }
+  .stat-box:nth-child(3) { border-top: 1px solid var(--border); }
+  .stat-box:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+  .stat-box { padding: 1rem 0.75rem; }
+
+  /* Layout — sidebar stacks above events */
+  .main-wrap {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .sidebar { position: static; }
+
+  /* Event cards */
+  .event-card { padding: 0.6rem 0.75rem; gap: 0.6rem; }
+  .cardBody { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .badges { flex-wrap: wrap; }
+
+  /* Modal — full screen on mobile */
+  .modal-backdrop { padding: 0; align-items: flex-end; }
+  .modal {
+    border-radius: 14px 14px 0 0;
+    max-width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Form */
+  .form-2col { grid-template-columns: 1fr; gap: 0; }
+  .form-row input,
+  .form-row select,
+  .form-row textarea { font-size: 16px; } /* prevents iOS zoom */
+
+  /* Month heading */
+  .month-heading { font-size: 17px; }
+
+  /* Past toggle + header */
+  .list-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .events-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+@media (max-width: 400px) {
+  .stat-n { font-size: 22px; }
+  .stat-l { font-size: 10px; }
+  .nav-brand-main { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="logo.png" alt="Nammude Switzerland" class="nav-logo">
+      <div class="nav-brand-text">
+        <span class="nav-brand-main">Nammude Switzerland</span>
+        <span class="nav-brand-sub">നമ്മുടെ സ്വിറ്റ്സർലൻഡ്</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="malayalee-ch-events.html" class="active">Events</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#">Resources</a></li>
+    </ul>
+    <button class="nav-cta" onclick="openModal()">+ Submit event</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <h1>Malayalee Events Calendar</h1>
+    <p>A shared calendar for Malayalees across Switzerland — plan together, celebrate together.</p>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-row">
+  <div class="stats-inner">
+    <div class="stat-box"><div class="stat-n" id="s-total">41</div><div class="stat-l">Total events</div></div>
+    <div class="stat-box"><div class="stat-n" id="s-orgs">0</div><div class="stat-l">By organizations</div></div>
+    <div class="stat-box"><div class="stat-n" id="s-public">0</div><div class="stat-l">Public events</div></div>
+    <div class="stat-box"><div class="stat-n" id="s-upcoming">0</div><div class="stat-l">Upcoming</div></div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Filter events</h2>
+
+    <div class="filter-group">
+      <label class="filter-label">Search</label>
+      <input type="text" id="f-search" placeholder="Event name, organizer…" oninput="renderEvents()">
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Year</label>
+      <select id="f-year" onchange="renderEvents()">
+        <option value="">All years</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Month</label>
+      <select id="f-month" onchange="renderEvents()">
+        <option value="">All months</option>
+        <option>January</option><option>February</option><option>March</option>
+        <option>April</option><option>May</option><option>June</option>
+        <option>July</option><option>August</option><option>September</option>
+        <option>October</option><option>November</option><option>December</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Category</label>
+      <select id="f-cat" onchange="renderEvents()">
+        <option value="">All categories</option>
+        <option>Holiday</option>
+        <option>Community</option>
+        <option>Cultural</option>
+        <option>Religious</option>
+        <option>Sports</option>
+        <option>Information</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Type</label>
+      <select id="f-type" onchange="renderEvents()">
+        <option value="">All types</option>
+        <option>Organization</option>
+        <option>Government</option>
+        <option>General</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Visibility</label>
+      <select id="f-vis" onchange="renderEvents()">
+        <option value="">All</option>
+        <option value="Public">Public only</option>
+        <option value="Members only">Members only</option>
+      </select>
+    </div>
+
+    <button class="reset-btn" onclick="resetFilters()">Reset all filters</button>
+
+    <div class="submit-cta">
+      <button class="submit-cta-btn" onclick="openModal()">+ Submit an event</button>
+      <p>Events are reviewed by the admin team before appearing on the calendar.</p>
+    </div>
+  </aside>
+
+  <!-- Events list -->
+  <main class="events-area">
+    <div class="events-header">
+      <div>
+        <h2>All events</h2>
+        <div class="last-updated" id="last-updated"></div>
+      </div>
+      <span class="count-badge" id="count-label"></span>
+    </div>
+    <div class="past-toggle-wrap" id="past-toggle-wrap">
+      <button class="past-toggle-btn" id="past-toggle-btn" onclick="togglePast()">Show past events</button>
+      <button class="past-toggle-btn" id="holiday-toggle-btn" onclick="toggleHolidays()">Show holidays</button>
+    </div>
+    <div id="events-list"></div>
+  </main>
+</div>
+
+<!-- Submit Modal -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="handleBackdropClick(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Submit an event</h2>
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    </div>
+
+    <div class="private-note">
+      <strong>Private events welcome.</strong> For family celebrations (holy communion, birthdays, etc.) — only the event name, date, and place will be shown publicly. Full details remain private.
+    </div>
+
+    <div id="submit-form">
+      <form id="event-form" onsubmit="submitEvent(event)">
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field" id="bot-field"></label></p>
+
+      <div class="form-row">
+        <label>Event name *</label>
+        <input type="text" id="f-name" name="event-name" placeholder="e.g. Thomas's Holy Communion" oninput="checkConflict()" required>
+      </div>
+
+      <div class="form-2col">
+        <div class="form-row">
+          <label>Start date *</label>
+          <input type="date" id="f-startdate" name="start-date" onchange="checkConflict()" required>
+        </div>
+        <div class="form-row">
+          <label>End date</label>
+          <input type="date" id="f-enddate" name="end-date">
+        </div>
+      </div>
+
+      <div class="conflict-alert" id="conflict-alert"></div>
+
+      <div class="form-2col">
+        <div class="form-row">
+          <label>Category *</label>
+          <select id="f-fcat" name="category" required onchange="handleCategoryChange(this.value)">
+            <option value="">Select…</option>
+            <option>Community</option>
+            <option>Cultural</option>
+            <option>Religious</option>
+            <option>Sports</option>
+            <option>Holiday</option>
+            <option>Information</option>
+            <option>Private (family event)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Visibility *</label>
+          <select id="f-fvis" name="visibility">
+            <option value="Public">Public</option>
+            <option value="Members only">Members only</option>
+            <option value="Private">Private (details hidden)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Organizer / organization *</label>
+        <input type="text" id="f-forg" name="organizer" placeholder="e.g. Bharatheeya Kalalayam or your name" required>
+      </div>
+
+      <div class="form-row">
+        <label>Venue / location</label>
+        <input type="text" id="f-fvenue" name="venue" placeholder="e.g. Gemeindehaus, Steinhausen / Zug">
+      </div>
+
+      <div class="form-row">
+        <label>Canton</label>
+        <select id="f-fcanton" name="canton">
+          <option value="">Select canton…</option>
+          <option>Aargau</option><option>Appenzell Ausserrhoden</option><option>Appenzell Innerrhoden</option>
+          <option>Basel-Landschaft</option><option>Basel-Stadt</option><option>Bern</option>
+          <option>Fribourg</option><option>Geneva</option><option>Glarus</option>
+          <option>Graubünden</option><option>Jura</option><option>Lucerne</option>
+          <option>Nidwalden</option><option>Obwalden</option><option>Schaffhausen</option>
+          <option>Schwyz</option><option>Solothurn</option><option>St. Gallen</option>
+          <option>Thurgau</option><option>Ticino</option><option>Uri</option>
+          <option>Valais</option><option>Vaud</option><option>Zug</option>
+          <option>Zurich</option><option>Switzerland-wide</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>Description / notes</label>
+        <textarea id="f-fdesc" name="description" placeholder="Any additional details about the event…"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label>Your contact email *</label>
+        <input type="email" id="f-femail" name="email" placeholder="your@email.com" required>
+        <p class="form-note">Your email is only used by the admin team to follow up. It will not be published.</p>
+      </div>
+
+      <button type="submit" class="submit-form-btn" id="submit-form-btn">Submit for review</button>
+      </form>
+    </div>
+
+    <div class="success-banner" id="success-banner">
+      Your event has been submitted successfully.<br>
+      The admin team will review it and add it to the calendar. Thank you!
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <p><strong>Nammude Switzerland</strong> · Events Calendar · Volunteer-run · Non-commercial</p>
+  <p style="margin-top:4px;font-style:italic;color:var(--text-light);">കേരളത്തിന്റെ മണം, സ്വിസ് മലകളിൽ</p>
+</footer>
+
+<script>
+// ─── Google Sheets live integration ───────────────────────────────────────
+const SHEET_ID   = CONFIG.SHEET_ID;
+const SHEET_NAME = CONFIG.SHEET_NAME;
+const CSV_URL    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+const MONTHS_ORDER = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DOW_NAMES    = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+let EVENTS = [];  // populated from sheet
+let showPast     = false;
+let showHolidays = false;
+// Parse DD.MM.YYYY → YYYY-MM-DD
+function parseDate(str) {
+  if (!str) return '';
+  const p = str.trim().split('.');
+  if (p.length === 3) return `${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`;
+  return str.trim();
+}
+
+function getYear(dateStr)  { return dateStr ? dateStr.split('-')[0] : ''; }
+function getMonth(dateStr) {
+  if (!dateStr) return '';
+  return MONTHS_ORDER[parseInt(dateStr.split('-')[1]) - 1] || '';
+}
+function getDow(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  return DOW_NAMES[d.getDay()];
+}
+
+// Parse CSV text respecting quoted fields
+function parseCSV(text) {
+  const lines   = text.trim().split('\n');
+  const headers = splitCSVLine(lines[0]).map(h => h.replace(/^"|"$/g, '').trim());
+  console.log('Sheet headers detected:', headers);
+  return lines.slice(1).map(line => {
+    const vals = splitCSVLine(line);
+    const obj  = {};
+    headers.forEach((h, i) => { obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim(); });
+    return obj;
+  });
+}
+function splitCSVLine(line) {
+  const result = []; let cur = ''; let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { result.push(cur); cur = ''; }
+    else { cur += c; }
+  }
+  result.push(cur);
+  return result;
+}
+
+function rowToEvent(row, idx) {
+  const start = parseDate(row['Start Date']);
+  const end   = parseDate(row['End Date']) || start;
+  if (!start) return null;
+  const d = new Date(start + 'T00:00:00');
+  const MONTHS_LIST = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS_LIST   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  // Try both possible column name variants for organizer
+  const org = (row['Organizer / Org Name'] || row['Organizer/Org Name'] || row['Organizer'] || '').trim();
+  const type = (row['Type'] || '').trim();
+  const cat  = (row['Category'] || '').trim();
+
+  return {
+    id:     idx,
+    start,
+    end,
+    year:   start.split('-')[0],
+    month:  (row['Month'] || MONTHS_LIST[d.getMonth()]).trim(),
+    dow:    (row['Day']   || DAYS_LIST[d.getDay()]).trim(),
+    type,
+    cat,
+    org,
+    name:   (row['Event Name'] || '').trim(),
+    venue:  (row['Venue']  || '').trim(),
+    vis:    (row['Visibility'] || 'Public').trim(),
+    status: (row['Status'] || '').trim(),
+  };
+}
+
+async function loadSheet() {
+  const list = document.getElementById('events-list');
+  list.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading events…</p></div>';
+  document.getElementById('count-label').textContent = '';
+
+  try {
+    const res = await fetch(CSV_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    EVENTS = rows.map((r, i) => rowToEvent(r, i)).filter(Boolean);
+    console.log('Total events loaded:', EVENTS.length);
+    console.log('Types found:', [...new Set(EVENTS.map(e => e.type))]);
+    console.log('Sample event:', EVENTS[0]);
+
+    // Populate year filter dynamically
+    const years = [...new Set(EVENTS.map(e => e.year))].sort();
+    const ySelect = document.getElementById('f-year');
+    ySelect.innerHTML = '<option value="">All years</option>';
+    years.forEach(y => {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      ySelect.appendChild(opt);
+    });
+    // Default to current year if present
+    const thisYear = new Date().getFullYear().toString();
+    if (years.includes(thisYear)) ySelect.value = thisYear;
+
+    const now = new Date();
+    document.getElementById('last-updated').textContent =
+      `Updated ${now.toLocaleDateString('en-CH', {day:'numeric',month:'short',year:'numeric'})} at ${now.toLocaleTimeString('en-CH',{hour:'2-digit',minute:'2-digit'})}`;
+
+    updateStats();
+    renderEvents();
+  } catch (err) {
+    list.innerHTML = `<div class="error-state">
+      <strong>Could not load events from Google Sheets.</strong><br>
+      Please check your internet connection or try refreshing the page.<br>
+      <small style="opacity:0.7">${err.message}</small>
+    </div>`;
+  }
+}
+
+const TODAY = new Date().toISOString().split('T')[0];
+
+const CAT_CLASS = {
+  Holiday:'b-holiday', Community:'b-community', Cultural:'b-cultural',
+  Religious:'b-religious', Sports:'b-sports', Information:'b-information'
+};
+
+function getDay(dateStr) { return parseInt(dateStr.split('-')[2]); }
+function isMultiDay(e) { return e.start !== e.end; }
+function formatDateRange(e) {
+  if (!isMultiDay(e)) return '';
+  const s = new Date(e.start+'T00:00:00'), en = new Date(e.end+'T00:00:00');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${s.getDate()} – ${en.getDate()} ${months[en.getMonth()]}`;
+}
+
+function togglePast() {
+  showPast = !showPast;
+  document.getElementById('past-toggle-btn').textContent = showPast ? 'Hide past events' : 'Show past events';
+  renderEvents();
+}
+
+function toggleHolidays() {
+  showHolidays = !showHolidays;
+  document.getElementById('holiday-toggle-btn').textContent = showHolidays ? 'Hide holidays' : 'Show holidays';
+  renderEvents();
+}
+
+function renderEvents() {
+  const fy = document.getElementById('f-year').value;
+  const fm = document.getElementById('f-month').value;
+  const fc = document.getElementById('f-cat').value;
+  const ft = document.getElementById('f-type').value;
+  const fv = document.getElementById('f-vis').value;
+  const fs = document.getElementById('f-search').value.toLowerCase().trim();
+
+  const filtered = EVENTS.filter(e => {
+    if (!showPast && e.start < TODAY) return false;
+    if (fy && e.year !== fy) return false;
+    if (fm && e.month !== fm) return false;
+    if (!showHolidays && fc === '' && (e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General')) return false;
+    if (fc && e.cat !== fc) return false;
+    if (ft && e.type !== ft) return false;
+    if (fv && e.vis !== fv) return false;
+    if (fs && !e.name.toLowerCase().includes(fs) && !e.org.toLowerCase().includes(fs) && !e.venue.toLowerCase().includes(fs)) return false;
+    return true;
+  });
+
+  const hasPast = EVENTS.filter(e => fy ? e.year === fy : true).some(e => e.start < TODAY);
+  document.getElementById('past-toggle-wrap').style.display = hasPast ? '' : 'none';
+  document.getElementById('count-label').textContent = filtered.length + ' event' + (filtered.length !== 1 ? 's' : '');
+
+  const list = document.getElementById('events-list');
+  if (!filtered.length) {
+    list.innerHTML = '<div class="no-results"><p>No events match your filters.</p><small>Try adjusting or resetting the filters.</small></div>';
+    return;
+  }
+
+  const byMonth = {};
+  filtered.forEach(e => {
+    const key = `${e.year}-${MONTHS_ORDER.indexOf(e.month).toString().padStart(2,'0')}`;
+    if (!byMonth[key]) byMonth[key] = { label: `${e.month} ${e.year}`, events: [] };
+    byMonth[key].events.push(e);
+  });
+
+  // Sort events within each month by start date
+  Object.values(byMonth).forEach(group => {
+    group.events.sort((a, b) => a.start.localeCompare(b.start));
+  });
+
+  let html = '';
+  Object.keys(byMonth).sort().forEach(key => {
+    const { label, events: evs } = byMonth[key];
+    html += `<div class="month-group">
+      <div class="month-heading">${label} <span class="month-count">${evs.length} event${evs.length!==1?'s':''}</span></div>`;
+    evs.forEach(e => {
+      const day     = getDay(e.start);
+      const isPast  = e.start < TODAY;
+      const isPrivate = e.vis === 'Private';
+      const multiday  = isMultiDay(e) ? `<span class="event-multiday">${formatDateRange(e)}</span>` : '';
+
+      // Private events: show 'Private' instead of organizer name
+      const orgDisplay = isPrivate ? 'Private' : (e.org || (e.type === 'Government' ? 'Swiss Federation' : ''));
+      const titleLine  = orgDisplay
+        ? `<div class="event-title">${e.name} <span style="font-weight:400;color:var(--text-muted)">· ${orgDisplay}</span></div>`
+        : `<div class="event-title">${e.name}</div>`;
+
+      // Private events: show venue if available, else hide it
+      const venueHtml = (!isPrivate && e.venue) ? `<div class="event-venue">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>
+        ${e.venue}</div>` : (isPrivate && e.venue ? `<div class="event-venue">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>
+        ${e.venue}</div>` : '');
+
+      // Badge logic — private events only show 'Private' badge, not 'Members'
+      const visBadge = isPrivate
+        ? `<span class="badge b-private">Private</span>`
+        : e.vis === 'Public'
+          ? `<span class="badge b-public">Public</span>`
+          : `<span class="badge b-members">Members</span>`;
+
+      // Card left border — private gets gold, members gets purple
+      const cardClass = [
+        isPrivate          ? 'private-card'    :
+        e.vis === 'Members only' ? 'members-card' : '',
+        isPast ? 'past-event-card' : ''
+      ].filter(Boolean).join(' ');
+
+      const govtBadge  = e.type === 'Government' ? '<span class="badge b-govt">Swiss holiday</span>' : '';
+      const multiBadge = isMultiDay(e) ? '<span class="badge b-multiday">Multi-day</span>' : '';
+
+      html += `<div class="event-card ${cardClass}">
+        <div class="date-box">
+          <div class="date-day">${day}</div>
+          <div class="date-dow">${(e.dow||'').substring(0,3)}</div>
+        </div>
+        <div class="event-body">
+          <div class="event-main">
+            ${titleLine}${venueHtml}${multiday}
+          </div>
+          <div class="badges">
+            <span class="badge ${CAT_CLASS[e.cat]||'b-information'}">${e.cat}</span>
+            ${visBadge}${govtBadge}${multiBadge}
+          </div>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function updateStats() {
+  document.getElementById('s-total').textContent    = EVENTS.length;
+  document.getElementById('s-orgs').textContent     = EVENTS.filter(e => e.type === 'Organization').length;
+  document.getElementById('s-public').textContent   = EVENTS.filter(e => e.vis === 'Public').length;
+  document.getElementById('s-upcoming').textContent = EVENTS.filter(e => e.start >= TODAY).length;
+}
+
+function resetFilters() {
+  ['f-month','f-cat','f-type','f-vis'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-search').value = '';
+  showHolidays = false;
+  document.getElementById('holiday-toggle-btn').textContent = 'Show holidays';
+  const thisYear = new Date().getFullYear().toString();
+  const ySelect  = document.getElementById('f-year');
+  const hasYear  = [...ySelect.options].some(o => o.value === thisYear);
+  ySelect.value  = hasYear ? thisYear : '';
+  renderEvents();
+}
+
+function openModal() {
+  document.getElementById('modal-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  // Reset conflict state
+  document.getElementById('conflict-alert').style.display = 'none';
+  const btn = document.getElementById('submit-form-btn');
+  if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+}
+function handleBackdropClick(e) {
+  if (e.target === document.getElementById('modal-backdrop')) closeModal();
+}
+
+function handleCategoryChange(val) {
+  const visSelect = document.getElementById('f-fvis');
+
+  if (val === 'Private (family event)') {
+    visSelect.innerHTML = '<option value="Private">Private (details hidden)</option>';
+    visSelect.disabled = true;
+    visSelect.style.opacity = '0.6';
+    visSelect.style.cursor  = 'not-allowed';
+  } else if (val === 'Holiday' || val === 'Information') {
+    visSelect.innerHTML = '<option value="Public">Public</option>';
+    visSelect.disabled = true;
+    visSelect.style.opacity = '0.6';
+    visSelect.style.cursor  = 'not-allowed';
+  } else {
+    visSelect.innerHTML = `
+      <option value="Public">Public</option>
+      <option value="Members only">Members only</option>
+      <option value="Private">Private (details hidden)</option>`;
+    visSelect.disabled = false;
+    visSelect.style.opacity = '1';
+    visSelect.style.cursor  = 'pointer';
+  }
+}
+
+function checkConflict() {
+  const date    = document.getElementById('f-startdate').value;
+  const alertEl = document.getElementById('conflict-alert');
+  const submitBtn = document.getElementById('submit-form-btn');
+
+  if (!date) {
+    alertEl.style.display = 'none';
+    submitBtn.disabled    = false;
+    submitBtn.style.opacity = '1';
+    return;
+  }
+
+  const conflicts = EVENTS.filter(e => {
+    // Check if submitted date falls within any existing event's date range
+    return e.type === 'Organization' && date >= e.start && date <= e.end;
+  });
+
+  if (conflicts.length) {
+    const selectedDate = new Date(date + 'T00:00:00');
+    const formatted = selectedDate.toLocaleDateString('en-CH', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+    const items = conflicts.map(e => {
+      const isMulti = e.start !== e.end;
+      const dateLabel = isMulti
+        ? `${new Date(e.start+'T00:00:00').toLocaleDateString('en-CH',{day:'numeric',month:'short'})} – ${new Date(e.end+'T00:00:00').toLocaleDateString('en-CH',{day:'numeric',month:'short'})}`
+        : '';
+      return `<div class="conflict-event-item">
+        <div class="conflict-event-dot"></div>
+        <div>
+          <div class="conflict-event-name">${e.name}${dateLabel ? ' <span style="font-weight:400;color:var(--text-muted)">(' + dateLabel + ')</span>' : ''}</div>
+          ${e.org ? `<div class="conflict-event-org">${e.org}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+
+    alertEl.innerHTML = `
+      <div class="conflict-alert-header">
+        <div class="conflict-alert-icon">!</div>
+        Date clash on ${formatted}
+      </div>
+      ${items}
+      <div class="conflict-footer">⚠ You can still submit — but please consider choosing a different date to avoid overlap. The admin team will review and coordinate.</div>`;
+
+    alertEl.style.display = 'block';
+    // Warn but don't fully block — just change button style
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+  } else {
+    alertEl.style.display = 'none';
+    submitBtn.disabled    = false;
+    submitBtn.style.opacity = '1';
+  }
+}
+
+// ── APPS SCRIPT URL ── Replace with your deployed Apps Script URL
+const APPS_SCRIPT_URL = CONFIG.APPS_SCRIPT_URL;
+
+async function submitEvent(e) {
+  e.preventDefault();
+
+  if (document.getElementById('bot-field').value) return;
+
+  const btn = document.getElementById('submit-form-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Submitting…';
+
+  const params = new URLSearchParams({
+    action:       'submit',
+    'event-name': document.getElementById('f-name').value.trim(),
+    'start-date': document.getElementById('f-startdate').value,
+    'end-date':   document.getElementById('f-enddate').value,
+    category:     document.getElementById('f-fcat').value,
+    visibility:   document.getElementById('f-fvis').value,
+    organizer:    document.getElementById('f-forg').value.trim(),
+    venue:        document.getElementById('f-fvenue').value.trim(),
+    canton:       document.getElementById('f-fcanton').value,
+    description:  document.getElementById('f-fdesc').value.trim(),
+    email:        document.getElementById('f-femail').value.trim(),
+  });
+
+  try {
+    const res  = await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Submission failed');
+
+    document.getElementById('submit-form').style.display   = 'none';
+    document.getElementById('success-banner').style.display = 'block';
+  } catch (err) {
+    btn.disabled    = false;
+    btn.textContent = 'Submit for review';
+    alert('Something went wrong. Please try again.\n' + err.message);
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Boot — load from sheet
+loadSheet();
+</script>
+</body>
+</html>

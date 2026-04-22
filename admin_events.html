@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nammude Switzerland — Admin Events</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="logo.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LV0D0EJVS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9LV0D0EJVS');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+<style>
+:root {
+  --green:        #1a6b4a;
+  --green-mid:    #2d9b6a;
+  --green-light:  #e8f5ee;
+  --gold:         #c8922a;
+  --gold-light:   #fdf3e2;
+  --red:          #c0392b;
+  --red-light:    #fdecea;
+  --cream:        #fdfaf5;
+  --warm-white:   #fffef9;
+  --border:       #e4e0d8;
+  --text:         #1c1c1a;
+  --text-muted:   #6b6860;
+  --text-light:   #9a9790;
+  --serif:        'Lora', Georgia, serif;
+  --sans:         'Nunito', system-ui, sans-serif;
+  --radius:       10px;
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.07);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); font-size: 15px; color: var(--text); background: var(--cream); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+
+/* ── NAV ── */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(253,250,245,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+.nav-inner { max-width: 1080px; margin: 0 auto; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.nav-brand { display: flex; align-items: baseline; gap: 6px; }
+.nav-brand-main { font-family: var(--serif); font-size: 18px; color: var(--green); letter-spacing: -0.01em; }
+.nav-brand-sub { font-size: 12px; color: var(--text-muted); font-weight: 300; }
+.nav-tag { font-size: 11px; font-weight: 600; background: var(--green-light); color: var(--green); padding: 3px 10px; border-radius: 999px; letter-spacing: 0.04em; }
+.nav-back { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; transition: color 0.15s; }
+.nav-back:hover { color: var(--green); }
+
+/* ── LOGIN ── */
+.login-wrap { min-height: calc(100vh - 61px); display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; width: 100%; max-width: 380px; text-align: center; box-shadow: var(--shadow-md); }
+.login-icon { font-size: 32px; margin-bottom: 1rem; }
+.login-title { font-family: var(--serif); font-size: 22px; color: var(--text); margin-bottom: 6px; }
+.login-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.75rem; font-weight: 300; }
+.login-input { width: 100%; padding: 10px 14px; font-family: var(--sans); font-size: 15px; color: var(--text); background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); outline: none; margin-bottom: 12px; transition: border-color 0.15s; text-align: center; letter-spacing: 0.05em; }
+.login-input:focus { border-color: var(--green); }
+.login-btn { width: 100%; padding: 11px; font-family: var(--sans); font-size: 15px; font-weight: 600; color: #fff; background: var(--green); border: none; border-radius: var(--radius); cursor: pointer; transition: background 0.15s; }
+.login-btn:hover { background: var(--green-mid); }
+.login-error { font-size: 13px; color: var(--green); margin-top: 10px; display: none; }
+
+/* ── MAIN ── */
+.page-hero { background: var(--green); padding: 2rem 1.5rem 2.5rem; border-bottom: 3px solid var(--gold); }
+.hero-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.hero-title { font-family: var(--serif); font-size: clamp(22px, 3vw, 30px); color: #fff; }
+.hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 4px; font-weight: 300; }
+.refresh-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius); font-family: var(--sans); font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.refresh-btn:hover { background: rgba(255,255,255,0.22); }
+
+/* Stats */
+.stats-bar { background: var(--warm-white); border-bottom: 1px solid var(--border); }
+.stats-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+.stat-box { padding: 1.1rem 1rem; border-right: 1px solid var(--border); text-align: center; }
+.stat-box:last-child { border-right: none; }
+.stat-n { font-family: var(--serif); font-size: 26px; line-height: 1; }
+.stat-n.pending  { color: var(--gold); }
+.stat-n.approved { color: var(--green); }
+.stat-n.rejected { color: var(--green); }
+.stat-l { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+
+/* Content */
+.content { max-width: 1080px; margin: 0 auto; padding: 1.5rem; }
+.content-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
+.content-title { font-family: var(--serif); font-size: 18px; font-weight: 400; }
+.tab-row { display: flex; gap: 6px; }
+.tab-btn { padding: 6px 16px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--warm-white); font-family: var(--sans); font-size: 13px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+.tab-btn.active { background: var(--green); color: #fff; border-color: var(--green); font-weight: 600; }
+
+/* Submission card */
+.sub-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 10px; animation: fadeUp 0.3s ease both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.sub-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.sub-title { font-size: 16px; font-weight: 600; color: var(--text); }
+.sub-submitted { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.sub-id { font-size: 11px; color: var(--text-light); font-family: monospace; }
+.sub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px 1.5rem; margin-bottom: 1rem; }
+.sub-field label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 2px; }
+.sub-field span { font-size: 13px; color: var(--text); }
+.sub-desc { margin-bottom: 1rem; }
+.sub-desc label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 4px; }
+.sub-desc p { font-size: 13px; color: var(--text); background: var(--cream); border-radius: 6px; padding: 8px 12px; border: 1px solid var(--border); line-height: 1.6; }
+.sub-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 1rem; }
+.sub-email { font-size: 12px; color: var(--text-muted); flex: 1; }
+.sub-email strong { color: var(--text); }
+.btn-approve { display: flex; align-items: center; gap: 5px; padding: 8px 20px; background: var(--green); color: #fff; border: none; border-radius: var(--radius); font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.btn-approve:hover { background: var(--green-mid); }
+.btn-approve:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-reject { display: flex; align-items: center; gap: 5px; padding: 8px 20px; background: none; color: var(--green); border: 1px solid var(--red); border-radius: var(--radius); font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.btn-reject:hover { background: var(--green-light); }
+.btn-reject:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Status badge */
+.status-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.s-pending  { background: var(--gold-light);  color: var(--gold); }
+.s-approved { background: var(--green-light); color: var(--green); }
+.s-rejected { background: var(--green-light);   color: var(--green); }
+
+/* Reject modal */
+.modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; padding: 1.5rem; overflow-y: auto; align-items: center; justify-content: center; }
+.modal-backdrop.open { display: flex; }
+.modal { background: var(--warm-white); border-radius: 14px; width: 100%; max-width: 460px; padding: 2rem; margin: auto; }
+.modal-title { font-family: var(--serif); font-size: 20px; margin-bottom: 8px; }
+.modal-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.25rem; font-weight: 300; }
+.modal textarea { width: 100%; padding: 10px 12px; font-family: var(--sans); font-size: 14px; color: var(--text); background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); outline: none; resize: none; height: 100px; transition: border-color 0.15s; }
+.modal textarea:focus { border-color: var(--green); }
+.modal-note { font-size: 12px; color: var(--text-muted); margin-top: 6px; margin-bottom: 1.25rem; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.btn-cancel { padding: 9px 20px; background: none; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--sans); font-size: 14px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+.btn-cancel:hover { border-color: var(--text-muted); color: var(--text); }
+.btn-confirm-reject { padding: 9px 20px; background: var(--green); color: #fff; border: none; border-radius: var(--radius); font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.btn-confirm-reject:hover { background: #a93226; }
+
+/* Toast */
+.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--text); color: #fff; padding: 12px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500; z-index: 200; opacity: 0; transform: translateY(10px); transition: all 0.25s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.success { background: var(--green); }
+.toast.error   { background: var(--green); }
+
+/* Empty / loading */
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+.empty-state p { font-size: 15px; margin-bottom: 6px; }
+.empty-state small { font-size: 13px; }
+.loading-state { text-align: center; padding: 3rem; color: var(--text-muted); font-size: 14px; }
+.spinner { width: 26px; height: 26px; border: 2.5px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 0.75rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Footer */
+.site-footer { background: #0f3d2a; border-top: 1px solid var(--border); padding: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 3rem; }
+.site-footer strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+
+@media (max-width: 600px) {
+  .nav-brand-sub { display: none; }
+  .nav-brand-main { font-size: 15px; }
+  .sub-grid { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: repeat(3,1fr); }
+  .sub-actions { flex-wrap: wrap; gap: 8px; }
+  .btn-approve, .btn-reject { flex: 1; justify-content: center; }
+  .content { padding: 1rem; }
+  .hero-inner { flex-direction: column; align-items: flex-start; }
+  .modal { padding: 1.5rem 1rem; }
+  .modal-backdrop { padding: 0; align-items: flex-end; }
+  .modal { border-radius: 14px 14px 0 0; max-height: 85vh; overflow-y: auto; }
+  .content-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .sub-header { flex-direction: column; gap: 6px; }
+  .login-card { padding: 1.75rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img src="logo.png" alt="Nammude Switzerland" class="nav-logo">
+      <div class="nav-brand-text">
+        <span class="nav-brand-main">Nammude Switzerland</span>
+        <span class="nav-brand-sub">നമ്മുടെ സ്വിറ്റ്സർലൻഡ്</span>
+      </div>
+    </div>
+    <span class="nav-tag">Admin</span>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </div>
+</nav>
+
+<!-- Login screen -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-card">
+    <div class="login-icon">🔐</div>
+    <h1 class="login-title">Admin access</h1>
+    <p class="login-sub">Enter your admin password to manage event submissions.</p>
+    <input type="password" class="login-input" id="password-input" placeholder="Enter password" onkeydown="if(event.key==='Enter') login()">
+    <button class="login-btn" onclick="login()">Sign in</button>
+    <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- Admin dashboard (hidden until login) -->
+<div id="admin-screen" style="display:none;">
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="hero-inner">
+      <div>
+        <h1 class="hero-title">Event submissions</h1>
+        <div class="hero-sub">Review, approve or reject community event submissions.</div>
+      </div>
+      <button class="refresh-btn" onclick="loadSubmissions()">↻ Refresh</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-box"><div class="stat-n pending" id="s-pending">—</div><div class="stat-l">Pending</div></div>
+      <div class="stat-box"><div class="stat-n approved" id="s-approved">—</div><div class="stat-l">Approved</div></div>
+      <div class="stat-box"><div class="stat-n rejected" id="s-rejected">—</div><div class="stat-l">Rejected</div></div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="content-header">
+      <h2 class="content-title" id="list-title">Pending submissions</h2>
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="setTab('Pending', this)">Pending</button>
+        <button class="tab-btn" onclick="setTab('Approved', this)">Approved</button>
+        <button class="tab-btn" onclick="setTab('Rejected', this)">Rejected</button>
+      </div>
+    </div>
+    <div id="submissions-list">
+      <div class="loading-state"><div class="spinner"></div>Loading submissions…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Reject modal -->
+<div class="modal-backdrop" id="reject-modal" onclick="if(event.target===this)closeRejectModal()">
+  <div class="modal">
+    <h2 class="modal-title">Reject submission</h2>
+    <p class="modal-sub">Optionally provide a reason — it will be included in the email to the submitter.</p>
+    <textarea id="reject-reason" placeholder="e.g. Date conflicts with an existing event. Please choose a different date."></textarea>
+    <p class="modal-note">Leave blank to send a generic rejection message.</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeRejectModal()">Cancel</button>
+      <button class="btn-confirm-reject" onclick="confirmReject()">Send rejection</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <strong>Nammude Switzerland</strong> · Admin panel · Restricted access
+</footer>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+// Replace this URL after you deploy your Apps Script
+const APPS_SCRIPT_URL = CONFIG.APPS_SCRIPT_URL;
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let PASSWORD        = '';
+let ALL_SUBMISSIONS = [];
+let CURRENT_TAB     = 'Pending';
+let REJECT_ID       = null;
+
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+function login() {
+  const pw = document.getElementById('password-input').value.trim();
+  if (!pw) return;
+  PASSWORD = pw;
+  document.getElementById('login-error').style.display = 'none';
+  loadSubmissions();
+}
+
+// ── LOAD SUBMISSIONS ──────────────────────────────────────────────────────────
+async function loadSubmissions() {
+  document.getElementById('submissions-list').innerHTML =
+    '<div class="loading-state"><div class="spinner"></div>Loading submissions…</div>';
+
+  try {
+    const url = `${APPS_SCRIPT_URL}?action=getPending&password=${encodeURIComponent(PASSWORD)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (!data.ok) {
+      if (data.error === 'Unauthorized') {
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('login-screen').style.display = 'flex';
+        document.getElementById('admin-screen').style.display = 'none';
+        return;
+      }
+      throw new Error(data.error);
+    }
+
+    // Show admin screen
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+
+    ALL_SUBMISSIONS = data.data || [];
+    updateStats();
+    renderList();
+
+  } catch (err) {
+    document.getElementById('submissions-list').innerHTML =
+      `<div class="empty-state"><p>Could not load submissions.</p><small>${err.message}</small></div>`;
+
+    // If first load failed — could be wrong password
+    if (document.getElementById('admin-screen').style.display === 'none') {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+}
+
+// ── STATS ─────────────────────────────────────────────────────────────────────
+function updateStats() {
+  document.getElementById('s-pending').textContent  = ALL_SUBMISSIONS.filter(s => s['Status'] === 'Pending').length;
+  document.getElementById('s-approved').textContent = ALL_SUBMISSIONS.filter(s => s['Status'] === 'Approved').length;
+  document.getElementById('s-rejected').textContent = ALL_SUBMISSIONS.filter(s => s['Status'] === 'Rejected').length;
+}
+
+// ── TAB ───────────────────────────────────────────────────────────────────────
+function setTab(tab, el) {
+  CURRENT_TAB = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('list-title').textContent =
+    tab === 'Pending' ? 'Pending submissions' :
+    tab === 'Approved' ? 'Approved submissions' : 'Rejected submissions';
+  renderList();
+}
+
+// ── RENDER LIST ───────────────────────────────────────────────────────────────
+function renderList() {
+  const filtered = ALL_SUBMISSIONS.filter(s => s['Status'] === CURRENT_TAB);
+  const list     = document.getElementById('submissions-list');
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty-state">
+      <p>No ${CURRENT_TAB.toLowerCase()} submissions.</p>
+      <small>${CURRENT_TAB === 'Pending' ? 'New submissions will appear here.' : ''}</small>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map((s, i) => {
+    const id       = s['ID'] || '';
+    const isPending = s['Status'] === 'Pending';
+    return `
+    <div class="sub-card" style="animation-delay:${i * 0.05}s">
+      <div class="sub-header">
+        <div>
+          <div class="sub-title">${s['Event Name'] || '—'}</div>
+          <div class="sub-submitted">Submitted: ${s['Submitted At'] || '—'} &nbsp;·&nbsp; <span class="sub-id">${id}</span></div>
+        </div>
+        <span class="status-badge s-${(s['Status']||'pending').toLowerCase()}">${s['Status']}</span>
+      </div>
+
+      <div class="sub-grid">
+        <div class="sub-field"><label>Start date</label><span>${s['Start Date'] || '—'}</span></div>
+        <div class="sub-field"><label>End date</label><span>${s['End Date'] || '—'}</span></div>
+        <div class="sub-field"><label>Category</label><span>${s['Category'] || '—'}</span></div>
+        <div class="sub-field"><label>Visibility</label><span>${s['Visibility'] || '—'}</span></div>
+        <div class="sub-field"><label>Organizer</label><span>${s['Organizer / Org Name'] || '—'}</span></div>
+        <div class="sub-field"><label>Venue</label><span>${s['Venue'] || '—'}</span></div>
+        <div class="sub-field"><label>Canton</label><span>${s['Canton'] || '—'}</span></div>
+      </div>
+
+      ${s['Description'] ? `
+      <div class="sub-desc">
+        <label>Description</label>
+        <p>${s['Description']}</p>
+      </div>` : ''}
+
+      <div class="sub-actions">
+        <div class="sub-email">From: <strong>${s['Submitter Email'] || '—'}</strong></div>
+        ${isPending ? `
+        <button class="btn-approve" onclick="approve('${id}', this)">✓ Approve</button>
+        <button class="btn-reject"  onclick="openRejectModal('${id}')">✕ Reject</button>
+        ` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── APPROVE ───────────────────────────────────────────────────────────────────
+async function approve(id, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Approving…';
+  btn.nextElementSibling.disabled = true;
+
+  try {
+    const url = `${APPS_SCRIPT_URL}?action=approve&password=${encodeURIComponent(PASSWORD)}&id=${encodeURIComponent(id)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (!data.ok) throw new Error(data.error);
+
+    // Update local state
+    const sub = ALL_SUBMISSIONS.find(s => s['ID'] === id);
+    if (sub) sub['Status'] = 'Approved';
+    updateStats();
+    renderList();
+    showToast('Event approved and added to the calendar ✓', 'success');
+
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '✓ Approve';
+    btn.nextElementSibling.disabled = false;
+    showToast('Error: ' + err.message, 'error');
+  }
+}
+
+// ── REJECT MODAL ──────────────────────────────────────────────────────────────
+function openRejectModal(id) {
+  REJECT_ID = id;
+  document.getElementById('reject-reason').value = '';
+  document.getElementById('reject-modal').classList.add('open');
+}
+function closeRejectModal() {
+  document.getElementById('reject-modal').classList.remove('open');
+  REJECT_ID = null;
+}
+
+async function confirmReject() {
+  if (!REJECT_ID) return;
+  const reason = document.getElementById('reject-reason').value.trim();
+  const btn    = document.querySelector('.btn-confirm-reject');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const url = `${APPS_SCRIPT_URL}?action=reject&password=${encodeURIComponent(PASSWORD)}&id=${encodeURIComponent(REJECT_ID)}&reason=${encodeURIComponent(reason)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (!data.ok) throw new Error(data.error);
+
+    const sub = ALL_SUBMISSIONS.find(s => s['ID'] === REJECT_ID);
+    if (sub) sub['Status'] = 'Rejected';
+    updateStats();
+    renderList();
+    closeRejectModal();
+    showToast('Submission rejected and submitter notified.', 'error');
+
+  } catch (err) {
+    showToast('Error: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Send rejection';
+  }
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = 'toast ' + type;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeRejectModal();
+});
+</script>
+</body>
+</html>

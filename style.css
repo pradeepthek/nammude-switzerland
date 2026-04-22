@@ -1,0 +1,194 @@
+/* ─── Nammude Switzerland — Shared Styles ──────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap');
+
+:root {
+  /* ── Brand colors ── */
+  --green:        #1a6b4a;
+  --green-mid:    #2d9b6a;
+  --green-light:  #e8f5ee;
+  --green-pale:   #f2faf6;
+  --gold:         #c8922a;
+  --gold-light:   #fdf3e2;
+
+  /* ── Neutrals ── */
+  --cream:        #fdfaf5;
+  --warm-white:   #fffef9;
+  --border:       #e4e0d8;
+  --text:         #1c1c1a;
+  --text-muted:   #6b6860;
+  --text-light:   #9a9790;
+
+  /* ── Semantic badge colors ── */
+  --purple:       #6c3483;
+  --purple-light: #f2eaf8;
+  --blue:         #1a5276;
+  --blue-light:   #e8f0f8;
+  --red:          #c0392b;
+  --red-light:    #fdecea;
+  --gray:         #5a5a5a;
+  --gray-light:   #f4f4f2;
+
+  /* ── Typography ── */
+  --serif:        'Lora', Georgia, serif;
+  --sans:         'Nunito', system-ui, sans-serif;
+
+  /* ── Layout ── */
+  --radius:       10px;
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.07);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* ── Base reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── Shared nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(253,250,245,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+}
+.nav-inner {
+  max-width: 1080px; margin: 0 auto;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+}
+.nav-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+.nav-brand-main {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--green);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.nav-brand-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.nav-links { display: flex; gap: 2px; list-style: none; }
+.nav-links a {
+  display: block; padding: 6px 13px;
+  font-size: 14px; font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-links a:hover { background: var(--green-light); color: var(--green); }
+.nav-links a.active { color: var(--green); font-weight: 600; }
+.nav-cta {
+  display: inline-block; padding: 7px 18px;
+  background: var(--green); color: #fff !important;
+  border-radius: 8px; font-size: 13px; font-weight: 600;
+  border: none; cursor: pointer;
+  transition: background 0.15s;
+}
+.nav-cta:hover { background: var(--green-mid) !important; color: #fff; }
+
+/* ── Shared footer ── */
+.site-footer {
+  background: #0f3d2a;
+  border-top: 3px solid var(--green);
+  padding: 2.5rem 1.5rem 2rem;
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+}
+.footer-inner { max-width: 1080px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-logo { height: 52px; width: auto; margin-bottom: 12px; }
+.footer-brand-name { font-family: var(--serif); font-size: 18px; color: #fff; margin-bottom: 4px; }
+.footer-brand-tagline { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; font-style: italic; margin-bottom: 10px; }
+.footer-brand-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.15s; }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-tagline { font-size: 12px; color: rgba(200,146,42,0.5); font-style: italic; }
+
+/* ── Shared badges ── */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 500; }
+.b-holiday     { background: #fdecea;   color: #c0392b; }
+.b-community   { background: #e8f5ee;   color: #1a6b4a; }
+.b-cultural    { background: #f2eaf8;   color: #6c3483; }
+.b-religious   { background: #fdf3e2;   color: #c8922a; }
+.b-sports      { background: #e8f0f8;   color: #1a5276; }
+.b-information { background: #f4f4f2;   color: #5a5a5a; }
+.b-public      { background: #e8f5ee;   color: #1a6b4a; }
+.b-members     { background: #f2eaf8;   color: #6c3483; }
+.b-private     { background: #fdf3e2;   color: #c8922a; }
+.b-govt        { background: #e8f0f8;   color: #1a5276; }
+.b-multiday    { background: #fff3cd;   color: #856404; }
+
+/* ── Shared spinner & animations ── */
+.spinner {
+  width: 26px; height: 26px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 0.75rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive nav & footer ── */
+@media (max-width: 860px) {
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .nav-brand-sub { display: none; }
+  .nav-cta { padding: 6px 12px; font-size: 12px; }
+  .nav-brand-main { font-size: 15px; }
+  .footer-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}

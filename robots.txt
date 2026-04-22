@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin_events.html
+
+Sitemap: https://nammude-switzerland.netlify.app/sitemap.xml
