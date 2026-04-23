@@ -270,6 +270,15 @@ let ALL_SUBMISSIONS = [];
 let CURRENT_TAB     = 'Pending';
 let REJECT_ID       = null;
 
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function formatSubmittedAt(val) {
+  if (!val) return '—';
+  // Already has time e.g. "23.04.2026, 14:35" — return as-is
+  if (val.includes(':')) return val;
+  // Only has date e.g. "23.04.2026" — show without time
+  return val;
+}
+
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 function login() {
   const pw  = document.getElementById('password-input').value.trim();
@@ -379,7 +388,7 @@ function renderList() {
       <div class="sub-header">
         <div>
           <div class="sub-title">${s['Event Name'] || '—'}</div>
-          <div class="sub-submitted">Submitted: ${s['Submitted At'] || '—'} &nbsp;·&nbsp; <span class="sub-id">${id}</span></div>
+          <div class="sub-submitted">Submitted: ${formatSubmittedAt(s['Submitted At'])} &nbsp;·&nbsp; <span class="sub-id">${id}</span></div>
         </div>
         <span class="status-badge s-${(s['Status']||'pending').toLowerCase()}">${s['Status']}</span>
       </div>
