@@ -191,7 +191,7 @@ a { text-decoration: none; color: inherit; }
     <h1 class="login-title">Admin access</h1>
     <p class="login-sub">Enter your admin password to manage event submissions.</p>
     <input type="password" class="login-input" id="password-input" placeholder="Enter password" onkeydown="if(event.key==='Enter') login()">
-    <button class="login-btn" onclick="login()">Sign in</button>
+    <button class="login-btn" id="login-btn" onclick="login()">Sign in</button>
     <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
   </div>
 </div>
@@ -272,9 +272,13 @@ let REJECT_ID       = null;
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 function login() {
-  const pw = document.getElementById('password-input').value.trim();
+  const pw  = document.getElementById('password-input').value.trim();
   if (!pw) return;
-  PASSWORD = pw;
+  PASSWORD  = pw;
+  const btn = document.getElementById('login-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Signing in…';
+  btn.style.opacity = '0.8';
   document.getElementById('login-error').style.display = 'none';
   loadSubmissions();
 }
@@ -294,6 +298,8 @@ async function loadSubmissions() {
         document.getElementById('login-error').style.display = 'block';
         document.getElementById('login-screen').style.display = 'flex';
         document.getElementById('admin-screen').style.display = 'none';
+        const btn = document.getElementById('login-btn');
+        if (btn) { btn.disabled = false; btn.textContent = 'Sign in'; btn.style.opacity = '1'; }
         return;
       }
       throw new Error(data.error);

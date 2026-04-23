@@ -623,6 +623,8 @@ body {
   font-size: 13px;
 }
 .site-footer strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+.kasavu-text { font-size: 12px; color: rgba(200,146,42,0.5); font-style: italic; }
 
 /* Responsive */
 @media (max-width: 720px) {
@@ -921,9 +923,11 @@ body {
 
 <!-- Footer -->
 <footer class="site-footer">
-  <p><strong>Nammude Switzerland</strong> · Events Calendar · Volunteer-run · Non-commercial</p>
-  <p style="margin-top:6px;">For any queries, reach us at <a href="mailto:malayalee.events.ch@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:underline;">malayalee.events.ch@gmail.com</a></p>
-  <p style="margin-top:4px;font-style:italic;color:var(--text-light);">കേരളത്തിന്റെ മണം, സ്വിസ് മലകളിൽ</p>
+  <div style="max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;">
+    <span class="footer-copy">© 2026 Nammude Switzerland · Volunteer-run · Non-commercial</span>
+    <span class="footer-copy">For any queries, reach us at <a href="mailto:malayalee.events.ch@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:underline;">malayalee.events.ch@gmail.com</a></span>
+    <span class="kasavu-text">കേരളത്തിന്റെ മണം, സ്വിസ് മലകളിൽ</span>
+  </div>
 </footer>
 
 <script>
