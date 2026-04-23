@@ -310,6 +310,9 @@ async function loadSubmissions() {
     document.getElementById('admin-screen').style.display = 'block';
 
     ALL_SUBMISSIONS = data.data || [];
+    if (ALL_SUBMISSIONS.length > 0) {
+      console.log('Submission keys from sheet:', Object.keys(ALL_SUBMISSIONS[0]));
+    }
     updateStats();
     renderList();
 
@@ -370,7 +373,7 @@ function renderList() {
     const id        = s['ID'] || '';
     const isPending = s['Status'] === 'Pending';
     const isRejected = s['Status'] === 'Rejected';
-    const rejReason = s['Rejected Reason'] || '';
+    const rejReason  = s['Rejected Reason'] || s['Rejected reason'] || s['rejected reason'] || s['RejectedReason'] || '';
     return `
     <div class="sub-card" style="animation-delay:${i * 0.05}s">
       <div class="sub-header">
