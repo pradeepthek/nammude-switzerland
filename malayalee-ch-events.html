@@ -797,7 +797,7 @@ body {
       <div>
         <div style="display:flex;align-items:center;gap:10px;">
           <h2>All events</h2>
-          <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterSidebar()">⚙ Filters</button>
+          <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterSidebar()">Show Filters</button>
         </div>
         <div class="last-updated" id="last-updated"></div>
       </div>
@@ -1076,7 +1076,7 @@ function toggleFilterSidebar() {
   const btn     = document.getElementById('filter-toggle-btn');
   sidebar.classList.toggle('mobile-visible');
   btn.classList.toggle('active');
-  btn.textContent = sidebar.classList.contains('mobile-visible') ? '✕ Hide filters' : '⚙ Filters';
+  btn.textContent = sidebar.classList.contains('mobile-visible') ? 'Hide Filters' : 'Show Filters';
 }
 
 function togglePast() {
@@ -1151,11 +1151,12 @@ function renderEvents() {
         : `<div class="event-title">${e.name}</div>`;
 
       // Private events: show venue if available, else hide it
-      const venueHtml = (!isPrivate && e.venue) ? `<div class="event-venue">
-        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>
-        ${e.venue}</div>` : (isPrivate && e.venue ? `<div class="event-venue">
-        <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>
-        ${e.venue}</div>` : '');
+      const mapsUrl   = e.venue ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.venue + ' Switzerland')}` : '';
+      const venueSvg  = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>`;
+      const venueHtml = e.venue ? `<div class="event-venue">
+        <a href="${mapsUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:3px;color:inherit;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+          ${venueSvg}${e.venue}
+        </a></div>` : '';
 
       // Badge logic — private events only show 'Private' badge, not 'Members'
       const visBadge = isPrivate
