@@ -314,24 +314,15 @@ body {
   min-width: 48px;
 }
 .date-box.holiday-date {
+  background: var(--red-light);
+}
+.date-box.holiday-date .date-day { color: var(--red); }
+.date-box.holiday-date .date-dow { color: var(--red); opacity: 0.75; }
+.date-box.movie-date {
   background: var(--blue-light);
 }
-.date-day {
-  font-family: var(--serif);
-  font-size: 19px;
-  color: var(--green);
-  line-height: 1;
-}
-.date-box.holiday-date .date-day { color: var(--blue); }
-.date-dow {
-  font-size: 10px;
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: 1px;
-  opacity: 0.75;
-}
-.date-box.holiday-date .date-dow { color: var(--blue); }
+.date-box.movie-date .date-day { color: var(--blue); }
+.date-box.movie-date .date-dow { color: var(--blue); opacity: 0.75; }
 
 .event-body { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 .event-main { flex: 1; min-width: 0; }
@@ -1154,9 +1145,16 @@ function renderEvents() {
     byMonth[key].events.push(e);
   });
 
-  // Sort events within each month by start date
+  // Sort events within each month by start date then time
   Object.values(byMonth).forEach(group => {
-    group.events.sort((a, b) => a.start.localeCompare(b.start));
+    group.events.sort((a, b) => {
+      const dateCmp = a.start.localeCompare(b.start);
+      if (dateCmp !== 0) return dateCmp;
+      // Same date — sort by time
+      const tA = a.time || '99:99';
+      const tB = b.time || '99:99';
+      return tA.localeCompare(tB);
+    });
   });
 
   let html = '';
@@ -1203,7 +1201,7 @@ function renderEvents() {
       const multiBadge = isMultiDay(e) ? '<span class="badge b-multiday">Multi-day</span>' : '';
 
       html += `<div class="event-card ${cardClass}">
-        <div class="date-box${e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General' ? ' holiday-date' : ''}">
+        <div class="date-box${e.cat === 'Movie' ? ' movie-date' : (e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General' ? ' holiday-date' : '')}">
           <div class="date-day">${day}</div>
           <div class="date-dow">${(e.dow||'').substring(0,3)}</div>
         </div>
