@@ -311,6 +311,10 @@ body {
   border-radius: 7px;
   padding: 4px 3px;
   flex-shrink: 0;
+  min-width: 48px;
+}
+.date-box.holiday-date {
+  background: var(--red-light);
 }
 .date-day {
   font-family: var(--serif);
@@ -318,6 +322,7 @@ body {
   color: var(--green);
   line-height: 1;
 }
+.date-box.holiday-date .date-day { color: var(--red); }
 .date-dow {
   font-size: 10px;
   color: var(--green);
@@ -326,6 +331,7 @@ body {
   margin-top: 1px;
   opacity: 0.75;
 }
+.date-box.holiday-date .date-dow { color: var(--red); }
 
 .event-body { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 .event-main { flex: 1; min-width: 0; }
@@ -381,7 +387,24 @@ body {
 .b-govt        { background: #F1F5F9;   color: #334155; }
 .b-multiday    { background: #FEF9C3;   color: #854D0E; }
 
-/* Past events toggle */
+/* Filter toggle for mobile */
+.filter-toggle-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-toggle-btn:hover { border-color: var(--green); color: var(--green); }
+.filter-toggle-btn.active { background: var(--green-light); color: var(--green); border-color: var(--green); }
 .past-toggle-wrap {
   margin-bottom: 1rem;
   display: flex;
@@ -631,56 +654,28 @@ body {
 
 /* Responsive */
 @media (max-width: 720px) {
-  /* Nav */
   .nav-links { display: none; }
   .nav-brand-sub { display: none; }
   .nav-cta { padding: 6px 12px; font-size: 12px; }
-
-  /* Hero */
   .page-hero { padding: 1.5rem 1rem 2rem; }
-  .hero-inner { padding: 0; }
-
-  /* Stats — 2x2 grid */
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
   .stat-box:nth-child(2) { border-right: none; }
   .stat-box:nth-child(3) { border-top: 1px solid var(--border); }
   .stat-box:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
   .stat-box { padding: 1rem 0.75rem; }
-
-  /* Layout — sidebar stacks above events */
-  .main-wrap {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-    gap: 1rem;
-  }
-  .sidebar { position: static; }
-
-  /* Event cards */
+  .main-wrap { grid-template-columns: 1fr; padding: 1rem; gap: 0.75rem; }
+  /* Sidebar hidden by default on mobile */
+  .sidebar { position: static; display: none; margin-bottom: 0.75rem; }
+  .sidebar.mobile-visible { display: block; }
+  /* Show filter toggle on mobile */
+  .filter-toggle-btn { display: flex; }
   .event-card { padding: 0.6rem 0.75rem; gap: 0.6rem; }
   .cardBody { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .badges { flex-wrap: wrap; }
-
-  /* Modal — full screen on mobile */
   .modal-backdrop { padding: 0; align-items: flex-end; }
-  .modal {
-    border-radius: 14px 14px 0 0;
-    max-width: 100%;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 1.5rem 1rem;
-  }
-
-  /* Form */
+  .modal { border-radius: 14px 14px 0 0; max-width: 100%; max-height: 92vh; overflow-y: auto; padding: 1.5rem 1rem; }
   .form-2col { grid-template-columns: 1fr; gap: 0; }
-  .form-row input,
-  .form-row select,
-  .form-row textarea { font-size: 16px; } /* prevents iOS zoom */
-
-  /* Month heading */
+  .form-row input, .form-row select, .form-row textarea { font-size: 16px; }
   .month-heading { font-size: 17px; }
-
-  /* Past toggle + header */
-  .list-header { flex-direction: column; align-items: flex-start; gap: 6px; }
   .events-header { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 
@@ -794,18 +789,16 @@ body {
     </div>
 
     <button class="reset-btn" onclick="resetFilters()">Reset all filters</button>
-
-    <div class="submit-cta">
-      <button class="submit-cta-btn" onclick="openModal()">+ Submit an event</button>
-      <p>Events are reviewed by the admin team before appearing on the calendar.</p>
-    </div>
   </aside>
 
   <!-- Events list -->
   <main class="events-area">
     <div class="events-header">
       <div>
-        <h2>All events</h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h2>All events</h2>
+          <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterSidebar()">⚙ Filters</button>
+        </div>
         <div class="last-updated" id="last-updated"></div>
       </div>
       <span class="count-badge" id="count-label"></span>
@@ -1078,6 +1071,14 @@ function formatDateRange(e) {
   return `${s.getDate()} – ${en.getDate()} ${months[en.getMonth()]}`;
 }
 
+function toggleFilterSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const btn     = document.getElementById('filter-toggle-btn');
+  sidebar.classList.toggle('mobile-visible');
+  btn.classList.toggle('active');
+  btn.textContent = sidebar.classList.contains('mobile-visible') ? '✕ Hide filters' : '⚙ Filters';
+}
+
 function togglePast() {
   showPast = !showPast;
   document.getElementById('past-toggle-btn').textContent = showPast ? 'Hide past events' : 'Show past events';
@@ -1174,7 +1175,7 @@ function renderEvents() {
       const multiBadge = isMultiDay(e) ? '<span class="badge b-multiday">Multi-day</span>' : '';
 
       html += `<div class="event-card ${cardClass}">
-        <div class="date-box">
+        <div class="date-box${e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General' ? ' holiday-date' : ''}">
           <div class="date-day">${day}</div>
           <div class="date-dow">${(e.dow||'').substring(0,3)}</div>
         </div>
