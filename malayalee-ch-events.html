@@ -314,7 +314,7 @@ body {
   min-width: 48px;
 }
 .date-box.holiday-date {
-  background: var(--red-light);
+  background: var(--blue-light);
 }
 .date-day {
   font-family: var(--serif);
@@ -322,7 +322,7 @@ body {
   color: var(--green);
   line-height: 1;
 }
-.date-box.holiday-date .date-day { color: var(--red); }
+.date-box.holiday-date .date-day { color: var(--blue); }
 .date-dow {
   font-size: 10px;
   color: var(--green);
@@ -331,7 +331,7 @@ body {
   margin-top: 1px;
   opacity: 0.75;
 }
-.date-box.holiday-date .date-dow { color: var(--red); }
+.date-box.holiday-date .date-dow { color: var(--blue); }
 
 .event-body { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 .event-main { flex: 1; min-width: 0; }
@@ -1128,7 +1128,7 @@ function renderEvents() {
     if (!showPast && e.start < TODAY) return false;
     if (fy && e.year !== fy) return false;
     if (fm && e.month !== fm) return false;
-    if (!showHolidays && fc === '' && (e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General')) return false;
+    if (!showHolidays && fc === '' && (e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General') && e.cat !== 'Movie') return false;
     if (!showMovies && fc === '' && e.cat === 'Movie') return false;
     if (fc && e.cat !== fc) return false;
     if (ft && e.type !== ft) return false;
