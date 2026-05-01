@@ -962,7 +962,7 @@ body {
         <label>Your email *</label>
         <input type="email" id="edit-email" placeholder="your@email.com" required>
       </div>
-      <button class="submit-form-btn" onclick="submitEditRequest()">Send edit request</button>
+      <button class="submit-form-btn" id="edit-submit-btn" onclick="submitEditRequest()">Send edit request</button>
     </div>
     <div class="success-banner" id="edit-success" style="display:none;">
       Your edit request has been sent. The admin team will review and apply the changes if accurate. Thank you!
@@ -996,7 +996,7 @@ body {
         <label>Your email *</label>
         <input type="email" id="delete-email" placeholder="your@email.com" required>
       </div>
-      <button class="submit-form-btn" style="background:var(--red);" onclick="submitDeleteRequest()">Send deletion request</button>
+      <button class="submit-form-btn" id="delete-submit-btn" style="background:var(--red);" onclick="submitDeleteRequest()">Send deletion request</button>
     </div>
     <div class="success-banner" id="delete-success" style="display:none;">
       Your deletion request has been sent. The admin team will review it. Thank you!
@@ -1508,6 +1508,11 @@ async function submitEditRequest() {
   const reqName = document.getElementById('edit-name').value.trim();
   if (!changes || !email) { alert('Please fill in all required fields.'); return; }
 
+  const btn = document.getElementById('edit-submit-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '0.8';
+
   const params = new URLSearchParams({
     action: 'editRequest',
     'event-name': name,
@@ -1521,6 +1526,8 @@ async function submitEditRequest() {
     document.getElementById('edit-form').style.display    = 'none';
     document.getElementById('edit-success').style.display = 'block';
   } catch(err) {
+    const btn = document.getElementById('edit-submit-btn');
+    btn.disabled = false; btn.textContent = 'Send edit request'; btn.style.opacity = '1';
     alert('Something went wrong. Please try again.\n' + err.message);
   }
 }
@@ -1548,6 +1555,11 @@ async function submitDeleteRequest() {
   const reqName = document.getElementById('delete-name').value.trim();
   if (!reason || !email) { alert('Please fill in all required fields.'); return; }
 
+  const btn = document.getElementById('delete-submit-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '0.8';
+
   const params = new URLSearchParams({
     action: 'deleteRequest',
     'event-name': name,
@@ -1561,6 +1573,8 @@ async function submitDeleteRequest() {
     document.getElementById('delete-form').style.display    = 'none';
     document.getElementById('delete-success').style.display = 'block';
   } catch(err) {
+    const btn2 = document.getElementById('delete-submit-btn');
+    if(btn2){btn2.disabled=false;btn2.textContent='Send deletion request';btn2.style.opacity='1';}
     alert('Something went wrong. Please try again.\n' + err.message);
   }
 }
