@@ -70,7 +70,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Stats */
 .stats-bar { background: var(--warm-white); border-bottom: 1px solid var(--border); }
-.stats-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+.stats-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
 .stat-box { padding: 1.1rem 1rem; border-right: 1px solid var(--border); text-align: center; }
 .stat-box:last-child { border-right: none; }
 .stat-n { font-family: var(--serif); font-size: 26px; line-height: 1; }
@@ -153,7 +153,7 @@ a { text-decoration: none; color: inherit; }
   .nav-brand-sub { display: none; }
   .nav-brand-main { font-size: 15px; }
   .sub-grid { grid-template-columns: 1fr 1fr; }
-  .stats-inner { grid-template-columns: repeat(3,1fr); }
+  .stats-inner { grid-template-columns: repeat(4,1fr); }
   .sub-actions { flex-wrap: wrap; gap: 8px; }
   .btn-approve, .btn-reject { flex: 1; justify-content: center; }
   .content { padding: 1rem; }
@@ -216,6 +216,7 @@ a { text-decoration: none; color: inherit; }
       <div class="stat-box"><div class="stat-n pending" id="s-pending">—</div><div class="stat-l">Pending</div></div>
       <div class="stat-box"><div class="stat-n approved" id="s-approved">—</div><div class="stat-l">Approved</div></div>
       <div class="stat-box"><div class="stat-n rejected" id="s-rejected">—</div><div class="stat-l">Rejected</div></div>
+      <div class="stat-box"><div class="stat-n" id="s-requests" style="color:var(--blue);">—</div><div class="stat-l">Requests</div></div>
     </div>
   </div>
 
@@ -227,6 +228,7 @@ a { text-decoration: none; color: inherit; }
         <button class="tab-btn active" onclick="setTab('Pending', this)">Pending</button>
         <button class="tab-btn" onclick="setTab('Approved', this)">Approved</button>
         <button class="tab-btn" onclick="setTab('Rejected', this)">Rejected</button>
+        <button class="tab-btn" onclick="setTab('Requests', this)">Requests</button>
       </div>
     </div>
     <div id="submissions-list">
@@ -267,6 +269,7 @@ const APPS_SCRIPT_URL = CONFIG.APPS_SCRIPT_URL;
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let PASSWORD        = '';
 let ALL_SUBMISSIONS = [];
+let ALL_REQUESTS    = [];
 let CURRENT_TAB     = 'Pending';
 let REJECT_ID       = null;
 
@@ -320,6 +323,13 @@ async function loadSubmissions() {
     if (ALL_SUBMISSIONS.length > 0) {
       console.log('Submission keys from sheet:', Object.keys(ALL_SUBMISSIONS[0]));
     }
+
+    // Also load requests
+    const reqUrl  = `${APPS_SCRIPT_URL}?action=getRequests&password=${encodeURIComponent(PASSWORD)}`;
+    const reqRes  = await fetch(reqUrl, { redirect: 'follow' });
+    const reqData = await reqRes.json();
+    ALL_REQUESTS  = reqData.ok ? (reqData.data || []) : [];
+
     updateStats();
     renderList();
 
@@ -339,6 +349,7 @@ function updateStats() {
   document.getElementById('s-pending').textContent  = ALL_SUBMISSIONS.filter(s => s['Status'] === 'Pending').length;
   document.getElementById('s-approved').textContent = ALL_SUBMISSIONS.filter(s => s['Status'] === 'Approved').length;
   document.getElementById('s-rejected').textContent = ALL_SUBMISSIONS.filter(s => s['Status'] === 'Rejected').length;
+  document.getElementById('s-requests').textContent = ALL_REQUESTS.filter(r => r['Status'] === 'Pending').length;
 }
 
 // ── TAB ───────────────────────────────────────────────────────────────────────
@@ -347,15 +358,23 @@ function setTab(tab, el) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('list-title').textContent =
-    tab === 'Pending' ? 'Pending submissions' :
-    tab === 'Approved' ? 'Approved submissions' : 'Rejected submissions';
+    tab === 'Pending'   ? 'Pending submissions' :
+    tab === 'Approved'  ? 'Approved submissions' :
+    tab === 'Rejected'  ? 'Rejected submissions' :
+    'Edit & delete requests';
   renderList();
 }
 
 // ── RENDER LIST ───────────────────────────────────────────────────────────────
 function renderList() {
-  // Sort by Submitted At descending (latest first) for Approved and Rejected
-  const filtered = ALL_SUBMISSIONS
+  const list    = document.getElementById('submissions-list');
+  const titleEl = document.getElementById('list-title');
+  if (titleEl) titleEl.style.color = CURRENT_TAB === 'Rejected' ? 'var(--red)' : CURRENT_TAB === 'Requests' ? 'var(--blue)' : '';
+
+  if (CURRENT_TAB === 'Requests') {
+    renderRequests(list);
+    return;
+  }
     .filter(s => s['Status'] === CURRENT_TAB)
     .sort((a, b) => {
       if (CURRENT_TAB === 'Pending') return 0; // keep original order for pending
@@ -423,6 +442,98 @@ function renderList() {
       </div>
     </div>`;
   }).join('');
+}
+
+// ── RENDER REQUESTS ───────────────────────────────────────────────────────────
+function renderRequests(list) {
+  const filtered = ALL_REQUESTS.sort((a,b) => (b['Submitted At']||'').localeCompare(a['Submitted At']||''));
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="empty-state"><p>No edit or deletion requests.</p></div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map((r, i) => {
+    const id        = r['ID'] || '';
+    const type      = r['Type'] || '';
+    const isPending = r['Status'] === 'Pending';
+    const isEdit    = type === 'Edit';
+    return `
+    <div class="sub-card" style="animation-delay:${i*0.05}s;border-left:3px solid ${isEdit ? 'var(--green)' : 'var(--red)'}">
+      <div class="sub-header">
+        <div>
+          <div class="sub-title">${isEdit ? '✏️' : '🗑'} ${type} request — ${r['Event Name'] || '—'}</div>
+          <div class="sub-submitted">Submitted: ${formatSubmittedAt(r['Submitted At'])} &nbsp;·&nbsp; <span class="sub-id">${id}</span></div>
+        </div>
+        <span class="status-badge s-${(r['Status']||'pending').toLowerCase()}">${r['Status']}</span>
+      </div>
+
+      ${isEdit && r['Changes'] ? `
+      <div class="sub-desc">
+        <label>Requested changes</label>
+        <p>${r['Changes']}</p>
+      </div>` : ''}
+
+      ${!isEdit && r['Reason'] ? `
+      <div class="sub-desc">
+        <label style="color:var(--red)">Reason for deletion</label>
+        <p style="background:var(--red-light);border-color:#f5c6c2;color:var(--red);">${r['Reason']}</p>
+      </div>` : ''}
+
+      <div class="sub-actions">
+        <div class="sub-email">From: <strong>${r['Requester Name'] || 'Anonymous'}</strong> · ${r['Requester Email'] || '—'}</div>
+        ${isPending ? `
+        <button class="btn-approve" onclick="applyRequest('${id}', '${type}', '${(r['Event Name']||'').replace(/'/g,"\\'")}', this)">
+          ${isEdit ? '✓ Mark applied' : '✓ Delete event'}
+        </button>
+        <button class="btn-reject" onclick="dismissReq('${id}', this)">✕ Dismiss</button>
+        ` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function applyRequest(id, type, eventName, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Processing…';
+  btn.nextElementSibling.disabled = true;
+  const action = type === 'Delete' ? 'applyDelete' : 'applyEdit';
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=${action}&password=${encodeURIComponent(PASSWORD)}&id=${encodeURIComponent(id)}&eventName=${encodeURIComponent(eventName)}`;
+    const res  = await fetch(url, { redirect: 'follow' });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    const req = ALL_REQUESTS.find(r => r['ID'] === id);
+    if (req) req['Status'] = 'Applied';
+    updateStats();
+    renderList();
+    showToast(type === 'Delete' ? 'Event deleted ✓' : 'Edit marked as applied ✓', 'success');
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = type === 'Delete' ? '✓ Delete event' : '✓ Mark applied';
+    btn.nextElementSibling.disabled = false;
+    showToast('Error: ' + err.message, 'error');
+  }
+}
+
+async function dismissReq(id, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Dismissing…';
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=dismissRequest&password=${encodeURIComponent(PASSWORD)}&id=${encodeURIComponent(id)}`;
+    const res  = await fetch(url, { redirect: 'follow' });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    const req = ALL_REQUESTS.find(r => r['ID'] === id);
+    if (req) req['Status'] = 'Dismissed';
+    updateStats();
+    renderList();
+    showToast('Request dismissed.', '');
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = '✕ Dismiss';
+    showToast('Error: ' + err.message, 'error');
+  }
 }
 
 // ── APPROVE ───────────────────────────────────────────────────────────────────
