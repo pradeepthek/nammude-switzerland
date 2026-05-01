@@ -946,6 +946,8 @@ body {
     <p class="form-note" style="margin-bottom:1rem;">Your request will be reviewed by the admin team. Only accurate corrections will be applied.</p>
     <div id="edit-form">
       <input type="hidden" id="edit-event-id">
+    <input type="hidden" id="edit-event-date">
+    <input type="hidden" id="edit-event-time">
       <div class="form-row">
         <label>Event</label>
         <input type="text" id="edit-event-name" disabled style="opacity:0.6;">
@@ -980,6 +982,8 @@ body {
     <p class="form-note" style="margin-bottom:1rem;">Deletion requests are reviewed by the admin before anything is removed.</p>
     <div id="delete-form">
       <input type="hidden" id="delete-event-id">
+    <input type="hidden" id="delete-event-date">
+    <input type="hidden" id="delete-event-time">
       <div class="form-row">
         <label>Event</label>
         <input type="text" id="delete-event-name" disabled style="opacity:0.6;">
@@ -1295,8 +1299,8 @@ function renderEvents() {
           <div class="card-menu-wrap">
             <button class="card-menu-btn" onclick="toggleCardMenu(event, 'menu-${e.id}')">⋯</button>
             <div class="card-menu-dropdown" id="menu-${e.id}">
-              <button class="card-menu-item" onclick="openEditRequest(${e.id}, '${e.name.replace(/'/g,"\\'")}')">✏️ Request edit</button>
-              <button class="card-menu-item danger" onclick="openDeleteRequest(${e.id}, '${e.name.replace(/'/g,"\\'")}')">🗑 Request deletion</button>
+              <button class="card-menu-item" onclick="openEditRequest(${e.id}, '${e.name.replace(/'/g,"\\'")}', '${e.start}', '${e.time}')">✏️ Request edit</button>
+              <button class="card-menu-item danger" onclick="openDeleteRequest(${e.id}, '${e.name.replace(/'/g,"\\'")}', '${e.start}', '${e.time}')">🗑 Request deletion</button>
             </div>
           </div>
         </div>
@@ -1486,9 +1490,11 @@ document.addEventListener('click', () => {
 });
 
 // ── EDIT REQUEST ────────────────────────────────────────────────────────────
-function openEditRequest(id, name) {
+function openEditRequest(id, name, date, time) {
   document.getElementById('edit-event-id').value   = id;
   document.getElementById('edit-event-name').value = name;
+  document.getElementById('edit-event-date').value = date || '';
+  document.getElementById('edit-event-time').value = (time && time !== 'undefined') ? time : '';
   document.getElementById('edit-changes').value    = '';
   document.getElementById('edit-name').value       = '';
   document.getElementById('edit-email').value      = '';
@@ -1516,6 +1522,8 @@ async function submitEditRequest() {
   const params = new URLSearchParams({
     action: 'editRequest',
     'event-name': name,
+    'event-date': document.getElementById('edit-event-date').value,
+    'event-time': document.getElementById('edit-event-time').value,
     changes, email,
     'requester-name': reqName,
   });
@@ -1533,9 +1541,11 @@ async function submitEditRequest() {
 }
 
 // ── DELETE REQUEST ───────────────────────────────────────────────────────────
-function openDeleteRequest(id, name) {
+function openDeleteRequest(id, name, date, time) {
   document.getElementById('delete-event-id').value   = id;
   document.getElementById('delete-event-name').value = name;
+  document.getElementById('delete-event-date').value = date || '';
+  document.getElementById('delete-event-time').value = (time && time !== 'undefined') ? time : '';
   document.getElementById('delete-reason').value     = '';
   document.getElementById('delete-name').value       = '';
   document.getElementById('delete-email').value      = '';
@@ -1563,6 +1573,8 @@ async function submitDeleteRequest() {
   const params = new URLSearchParams({
     action: 'deleteRequest',
     'event-name': name,
+    'event-date': document.getElementById('delete-event-date').value,
+    'event-time': document.getElementById('delete-event-time').value,
     reason, email,
     'requester-name': reqName,
   });
