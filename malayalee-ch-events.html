@@ -1500,12 +1500,18 @@ function openEditRequest(id, name, date, time) {
   document.getElementById('edit-email').value      = '';
   document.getElementById('edit-form').style.display    = 'block';
   document.getElementById('edit-success').style.display = 'none';
+  // Reset button
+  const btn = document.getElementById('edit-submit-btn');
+  btn.disabled = false; btn.textContent = 'Send edit request'; btn.style.opacity = '1';
   document.getElementById('edit-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeEditModal() {
   document.getElementById('edit-modal').classList.remove('open');
   document.body.style.overflow = '';
+  // Reset button
+  const btn = document.getElementById('edit-submit-btn');
+  btn.disabled = false; btn.textContent = 'Send edit request'; btn.style.opacity = '1';
 }
 async function submitEditRequest() {
   const changes = document.getElementById('edit-changes').value.trim();
@@ -1551,12 +1557,18 @@ function openDeleteRequest(id, name, date, time) {
   document.getElementById('delete-email').value      = '';
   document.getElementById('delete-form').style.display    = 'block';
   document.getElementById('delete-success').style.display = 'none';
+  // Reset button
+  const btn = document.getElementById('delete-submit-btn');
+  btn.disabled = false; btn.textContent = 'Send deletion request'; btn.style.opacity = '1';
   document.getElementById('delete-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeDeleteModal() {
   document.getElementById('delete-modal').classList.remove('open');
   document.body.style.overflow = '';
+  // Reset button
+  const btn = document.getElementById('delete-submit-btn');
+  btn.disabled = false; btn.textContent = 'Send deletion request'; btn.style.opacity = '1';
 }
 async function submitDeleteRequest() {
   const reason  = document.getElementById('delete-reason').value.trim();
