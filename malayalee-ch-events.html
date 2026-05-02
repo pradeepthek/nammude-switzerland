@@ -1279,6 +1279,15 @@ function renderEvents() {
   list.innerHTML = html;
 }
 
+function updateStats() {
+  const fy = document.getElementById('f-year') ? document.getElementById('f-year').value : '';
+  const subset = fy ? EVENTS.filter(e => e.year === fy) : EVENTS;
+  document.getElementById('s-total').textContent    = subset.length;
+  document.getElementById('s-orgs').textContent     = subset.filter(e => e.type === 'Organization').length;
+  document.getElementById('s-public').textContent   = subset.filter(e => e.vis === 'Public').length;
+  document.getElementById('s-upcoming').textContent = subset.filter(e => e.start >= TODAY).length;
+}
+
 function resetFilters() {
   ['f-month','f-cat','f-type','f-vis'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('f-search').value = '';
