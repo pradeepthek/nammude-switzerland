@@ -1233,10 +1233,54 @@ function renderEvents() {
         ? `<div class="event-title">${e.name} <span style="font-weight:400;color:var(--text-muted)">· ${orgDisplay}</span></div>`
         : `<div class="event-title">${e.name}</div>`;
 
+      const mapsUrl   = e.venue ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.venue + ' Switzerland')}` : '';
+      const venueSvg  = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>`;
       const venueHtml = e.venue ? `<div class="event-venue">
         <a href="${mapsUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:3px;color:inherit;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
           ${venueSvg}${e.venue}
         </a></div>` : '';
+      const timeHtml  = e.time ? `<div class="event-time">🕐 ${e.time}</div>` : '';
+      const multiday  = isMultiDay(e) ? `<span class="event-multiday">${formatDateRange(e)}</span>` : '';
+      const visBadge  = e.vis === 'Public'
+        ? `<span class="badge b-public">Public</span>`
+        : `<span class="badge b-members">Members</span>`;
+      const cardClass = [
+        e.vis === 'Members only' ? 'members-card' : '',
+        isPast ? 'past-event-card' : ''
+      ].filter(Boolean).join(' ');
+      const govtBadge  = e.type === 'Government' ? '<span class="badge b-govt">Swiss holiday</span>' : '';
+      const multiBadge = isMultiDay(e) ? '<span class="badge b-multiday">Multi-day</span>' : '';
+
+      html += `<div class="event-card ${cardClass}">
+        <div class="date-box${e.cat === 'Movie' ? ' movie-date' : (e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General' ? ' holiday-date' : '')}">
+          <div class="date-day">${day}</div>
+          <div class="date-dow">${(e.dow||'').substring(0,3)}</div>
+        </div>
+        <div class="event-body">
+          <div class="event-main">
+            ${titleLine}${venueHtml}${timeHtml}${multiday}
+          </div>
+          <div class="badges">
+            <span class="badge ${CAT_CLASS[e.cat]||'b-information'}">${e.cat}</span>
+            ${visBadge}${govtBadge}${multiBadge}
+          </div>
+          <div class="card-menu-wrap">
+            <button class="card-menu-btn" onclick="toggleCardMenu(event, 'menu-${e.id}')">⋯</button>
+            <div class="card-menu-dropdown" id="menu-${e.id}">
+              <button class="card-menu-item" onclick="openEditRequest(${e.id}, '${e.name.replace(/'/g,"\'")}', '${e.start}', '${e.time}')">✏️ Request edit</button>
+              <button class="card-menu-item danger" onclick="openDeleteRequest(${e.id}, '${e.name.replace(/'/g,"\'")}', '${e.start}', '${e.time}')">🗑 Request deletion</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function resetFilters() {
+  ['f-month','f-cat','f-type','f-vis'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('f-search').value = '';
   showHolidays = false;
   showMovies   = false;
@@ -1268,7 +1312,7 @@ function handleBackdropClick(e) {
 function handleCategoryChange(val) {
   const visSelect = document.getElementById('f-fvis');
 
-else if (val === 'Holiday' || val === 'Information' || val === 'Movie') {
+  if (val === 'Holiday' || val === 'Information' || val === 'Movie') {
     visSelect.innerHTML = '<option value="Public">Public</option>';
     visSelect.disabled = true;
     visSelect.style.opacity = '0.6';
