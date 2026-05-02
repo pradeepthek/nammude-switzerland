@@ -302,7 +302,6 @@ body {
   border-color: #b8d4c4;
   box-shadow: 0 2px 8px rgba(26,107,74,0.06);
 }
-.event-card.private-card { border-left: 3px solid #9A3412; }
 .event-card.members-card { border-left: 3px solid #92400E; }
 
 .date-box {
@@ -382,7 +381,6 @@ body {
 .b-information { background: #F1F5F9;   color: #334155; }
 .b-public      { background: #CCFBF1;   color: #0F766E; }
 .b-members     { background: #FEF3C7;   color: #92400E; }
-.b-private     { background: #FFEDD5;   color: #9A3412; }
 .b-govt        { background: #F1F5F9;   color: #334155; }
 .b-movie     { background: #E0F2FE;   color: #0369A1; }
 
@@ -637,17 +635,6 @@ body {
   line-height: 1.6;
 }
 
-/* Private event info box */
-.private-note {
-  background: var(--gold-light);
-  border: 1px solid #f0c97a;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 13px;
-  color: #7a5a10;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-}
 
 /* Footer */
 .site-footer {
@@ -830,12 +817,7 @@ body {
       <h2>Submit an event</h2>
       <button class="modal-close" onclick="closeModal()">&#x2715;</button>
     </div>
-
-    <div class="private-note">
-      <strong>Private events welcome.</strong> For family celebrations (holy communion, birthdays, etc.) — only the event name, date, and place will be shown publicly. Full details remain private.
-    </div>
-
-    <div id="submit-form">
+<div id="submit-form">
       <form id="event-form" onsubmit="submitEvent(event)">
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field" id="bot-field"></label></p>
 
@@ -875,7 +857,6 @@ body {
             <option>Movie</option>
             <option>Holiday</option>
             <option>Information</option>
-            <option>Private (family event)</option>
           </select>
         </div>
         <div class="form-row">
@@ -883,7 +864,6 @@ body {
           <select id="f-fvis" name="visibility">
             <option value="Public">Public</option>
             <option value="Members only">Members only</option>
-            <option value="Private">Private (details hidden)</option>
           </select>
         </div>
       </div>
@@ -1248,78 +1228,15 @@ function renderEvents() {
     evs.forEach(e => {
       const day     = getDay(e.start);
       const isPast  = e.start < TODAY;
-      const isPrivate = e.vis === 'Private';
-      const multiday  = isMultiDay(e) ? `<span class="event-multiday">${formatDateRange(e)}</span>` : '';
-
-      // Private events: show 'Private' instead of organizer name
-      const orgDisplay = isPrivate ? 'Private' : (e.org || (e.type === 'Government' ? 'Swiss Federation' : ''));
+      const orgDisplay = e.org || (e.type === 'Government' ? 'Swiss Federation' : '');
       const titleLine  = orgDisplay
         ? `<div class="event-title">${e.name} <span style="font-weight:400;color:var(--text-muted)">· ${orgDisplay}</span></div>`
         : `<div class="event-title">${e.name}</div>`;
 
-      // Private events: show venue if available, else hide it
-      const timeHtml  = e.time ? `<div class="event-time">🕐 ${e.time}</div>` : '';
-      const mapsUrl   = e.venue ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.venue + ' Switzerland')}` : '';
-      const venueSvg  = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z" fill="currentColor"/></svg>`;
       const venueHtml = e.venue ? `<div class="event-venue">
         <a href="${mapsUrl}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:3px;color:inherit;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
           ${venueSvg}${e.venue}
         </a></div>` : '';
-
-      // Badge logic — private events only show 'Private' badge, not 'Members'
-      const visBadge = isPrivate
-        ? `<span class="badge b-private">Private</span>`
-        : e.vis === 'Public'
-          ? `<span class="badge b-public">Public</span>`
-          : `<span class="badge b-members">Members</span>`;
-
-      // Card left border — private gets gold, members gets purple
-      const cardClass = [
-        isPrivate          ? 'private-card'    :
-        e.vis === 'Members only' ? 'members-card' : '',
-        isPast ? 'past-event-card' : ''
-      ].filter(Boolean).join(' ');
-
-      const govtBadge  = e.type === 'Government' ? '<span class="badge b-govt">Swiss holiday</span>' : '';
-      const multiBadge = isMultiDay(e) ? '<span class="badge b-multiday">Multi-day</span>' : '';
-
-      html += `<div class="event-card ${cardClass}">
-        <div class="date-box${e.cat === 'Movie' ? ' movie-date' : (e.cat === 'Holiday' || e.type === 'Government' || e.type === 'General' ? ' holiday-date' : '')}">
-          <div class="date-day">${day}</div>
-          <div class="date-dow">${(e.dow||'').substring(0,3)}</div>
-        </div>
-        <div class="event-body">
-          <div class="event-main">
-            ${titleLine}${venueHtml}${timeHtml}${multiday}
-          </div>
-          <div class="badges">
-            <span class="badge ${CAT_CLASS[e.cat]||'b-information'}">${e.cat}</span>
-            ${visBadge}${govtBadge}${multiBadge}
-          </div>
-          <div class="card-menu-wrap">
-            <button class="card-menu-btn" onclick="toggleCardMenu(event, 'menu-${e.id}')">⋯</button>
-            <div class="card-menu-dropdown" id="menu-${e.id}">
-              <button class="card-menu-item" onclick="openEditRequest(${e.id}, '${e.name.replace(/'/g,"\\'")}', '${e.start}', '${e.time}')">✏️ Request edit</button>
-              <button class="card-menu-item danger" onclick="openDeleteRequest(${e.id}, '${e.name.replace(/'/g,"\\'")}', '${e.start}', '${e.time}')">🗑 Request deletion</button>
-            </div>
-          </div>
-        </div>
-      </div>`;
-    });
-    html += '</div>';
-  });
-  list.innerHTML = html;
-}
-
-function updateStats() {
-  document.getElementById('s-total').textContent    = EVENTS.length;
-  document.getElementById('s-orgs').textContent     = EVENTS.filter(e => e.type === 'Organization').length;
-  document.getElementById('s-public').textContent   = EVENTS.filter(e => e.vis === 'Public').length;
-  document.getElementById('s-upcoming').textContent = EVENTS.filter(e => e.start >= TODAY).length;
-}
-
-function resetFilters() {
-  ['f-month','f-cat','f-type','f-vis'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('f-search').value = '';
   showHolidays = false;
   showMovies   = false;
@@ -1351,12 +1268,7 @@ function handleBackdropClick(e) {
 function handleCategoryChange(val) {
   const visSelect = document.getElementById('f-fvis');
 
-  if (val === 'Private (family event)') {
-    visSelect.innerHTML = '<option value="Private">Private (details hidden)</option>';
-    visSelect.disabled = true;
-    visSelect.style.opacity = '0.6';
-    visSelect.style.cursor  = 'not-allowed';
-  } else if (val === 'Holiday' || val === 'Information' || val === 'Movie') {
+else if (val === 'Holiday' || val === 'Information' || val === 'Movie') {
     visSelect.innerHTML = '<option value="Public">Public</option>';
     visSelect.disabled = true;
     visSelect.style.opacity = '0.6';
@@ -1364,8 +1276,7 @@ function handleCategoryChange(val) {
   } else {
     visSelect.innerHTML = `
       <option value="Public">Public</option>
-      <option value="Members only">Members only</option>
-      <option value="Private">Private (details hidden)</option>`;
+      <option value="Members only">Members only</option>`;
     visSelect.disabled = false;
     visSelect.style.opacity = '1';
     visSelect.style.cursor  = 'pointer';
