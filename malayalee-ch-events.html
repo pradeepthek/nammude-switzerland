@@ -334,6 +334,11 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.event-title .event-org-inline {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.event-org-mobile { display: none; }
 .event-org {
   font-size: 12px;
   color: var(--text-muted);
@@ -667,7 +672,24 @@ body {
   /* Show filter toggle on mobile */
   .filter-toggle-btn { display: flex; }
   .event-card { padding: 0.6rem 0.75rem; gap: 0.6rem; }
-  .cardBody { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .event-body { flex-wrap: wrap; }
+  .event-main { min-width: 0; width: 100%; }
+  .event-title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+  .event-title .event-org-inline { display: none; }
+  .event-org-mobile {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .badges { flex-shrink: 0; }
+  /* Prevent horizontal scroll */
+  .main-wrap { overflow-x: hidden; }
+  .event-card { overflow: hidden; }
   .modal-backdrop { padding: 0; align-items: flex-end; }
   .modal { border-radius: 14px 14px 0 0; max-width: 100%; max-height: 92vh; overflow-y: auto; padding: 1.5rem 1rem; }
   .form-2col { grid-template-columns: 1fr; gap: 0; }
@@ -823,7 +845,7 @@ body {
 
       <div class="form-row">
         <label>Event name *</label>
-        <input type="text" id="f-name" name="event-name" placeholder="e.g. Grill Party" oninput="checkConflict()" required>
+        <input type="text" id="f-name" name="event-name" placeholder="e.g. Onam Celebration 2026" oninput="checkConflict()" required>
       </div>
 
       <div class="form-2col">
@@ -870,7 +892,7 @@ body {
 
       <div class="form-row">
         <label>Organizer / organization *</label>
-        <input type="text" id="f-forg" name="organizer" placeholder="e.g. Your organization name" required>
+        <input type="text" id="f-forg" name="organizer" placeholder="e.g. Bharatheeya Kalalayam or your name" required>
       </div>
 
       <div class="form-row">
@@ -1230,7 +1252,7 @@ function renderEvents() {
       const isPast  = e.start < TODAY;
       const orgDisplay = e.org || (e.type === 'Government' ? 'Swiss Federation' : '');
       const titleLine  = orgDisplay
-        ? `<div class="event-title">${e.name} <span style="font-weight:400;color:var(--text-muted)">· ${orgDisplay}</span></div>`
+        ? `<div class="event-title">${e.name} <span class="event-org-inline" style="font-weight:400;color:var(--text-muted)">· ${orgDisplay}</span></div><div class="event-org-mobile">${orgDisplay}</div>`
         : `<div class="event-title">${e.name}</div>`;
 
       const mapsUrl   = e.venue ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.venue + ' Switzerland')}` : '';
