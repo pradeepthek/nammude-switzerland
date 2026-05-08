@@ -661,11 +661,13 @@ body {
   .nav-brand-sub { display: none; }
   .nav-cta { padding: 6px 12px; font-size: 12px; }
   .page-hero { padding: 1.5rem 1rem 2rem; }
-  .stats-inner { grid-template-columns: repeat(2, 1fr); }
-  .stat-box:nth-child(2) { border-right: none; }
-  .stat-box:nth-child(3) { border-top: 1px solid var(--border); }
-  .stat-box:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
-  .stat-box { padding: 1rem 0.75rem; }
+  .stats-inner { grid-template-columns: repeat(4, 1fr); }
+  .stat-box { padding: 0.6rem 0.25rem; border-right: 1px solid var(--border); }
+  .stat-box:last-child { border-right: none; }
+  .stat-box:nth-child(3) { border-top: none; }
+  .stat-box:nth-child(4) { border-top: none; }
+  .stat-n { font-size: 18px; }
+  .stat-l { font-size: 9px; letter-spacing: 0.04em; }
   .main-wrap { grid-template-columns: 1fr; padding: 1rem; gap: 0.75rem; }
   /* Sidebar hidden by default on mobile */
   .sidebar { position: static; display: none; margin-bottom: 0.75rem; }
