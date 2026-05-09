@@ -819,8 +819,8 @@ body {
       </div>
       <span class="count-badge" id="count-label"></span>
     </div>
-    <div class="past-toggle-wrap" id="past-toggle-wrap">
-      <button class="past-toggle-btn" id="past-toggle-btn" onclick="togglePast()">Show past events</button>
+    <div class="past-toggle-wrap">
+      <button class="past-toggle-btn" id="past-toggle-btn" onclick="togglePast()" style="display:none;">Show past events</button>
       <button class="past-toggle-btn" id="holiday-toggle-btn" onclick="toggleHolidays()">Show holidays</button>
       <button class="past-toggle-btn" id="movie-toggle-btn" onclick="toggleMovies()">Show movies</button>
     </div>
@@ -1210,7 +1210,7 @@ function renderEvents() {
   });
 
   const hasPast = EVENTS.filter(e => fy ? e.year === fy : true).some(e => e.start < TODAY);
-  document.getElementById('past-toggle-wrap').style.display = hasPast ? '' : 'none';
+  document.getElementById('past-toggle-btn').style.display = hasPast ? '' : 'none';
   document.getElementById('count-label').textContent = filtered.length + ' event' + (filtered.length !== 1 ? 's' : '');
 
   const list = document.getElementById('events-list');
