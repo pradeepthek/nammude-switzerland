@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – Nammude Switzerland</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --clr-forest:     #1a3a2a;
+      --clr-gold:       #c8a84b;
+      --clr-gold-light: #f5edd6;
+      --clr-cream:      #faf9f6;
+      --clr-white:      #ffffff;
+      --clr-text:       #2c2c2c;
+      --clr-muted:      #6b6b6b;
+      --clr-border:     #e4ddd0;
+      --ff-serif:       'Lora', Georgia, serif;
+      --ff-sans:        'DM Sans', sans-serif;
+      --radius:         12px;
+      --shadow-sm:      0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md:      0 4px 20px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--ff-sans);
+      background: var(--clr-cream);
+      color: var(--clr-text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--clr-forest);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.65rem; text-decoration: none;
+    }
+    .nav-brand-logo {
+      width: 36px; height: 36px;
+      background: var(--clr-gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-serif); font-weight: 600; font-size: 1rem;
+      color: var(--clr-forest); flex-shrink: 0;
+    }
+    .nav-brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-brand-text .name {
+      font-family: var(--ff-serif); font-weight: 600; font-size: 0.95rem;
+      color: var(--clr-white); letter-spacing: 0.01em;
+    }
+    .nav-brand-text .sub { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.875rem; font-weight: 400;
+      padding: 0.4rem 0.75rem; border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--clr-white); background: rgba(255,255,255,0.08); }
+    .nav-cta {
+      background: var(--clr-gold) !important; color: var(--clr-forest) !important;
+      font-weight: 600 !important; padding: 0.4rem 1rem !important;
+    }
+    .nav-cta:hover { background: #d4b45a !important; }
+    @media (max-width: 640px) { .nav-links { display: none; } .nav { padding: 0 1.2rem; } }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: var(--clr-forest);
+      padding: 3.5rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c8a84b' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 48px; background: var(--clr-cream);
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center;
+      background: rgba(200,168,75,0.15);
+      border: 1px solid rgba(200,168,75,0.35);
+      color: var(--clr-gold);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.3rem 0.9rem; border-radius: 2rem;
+      margin-bottom: 1.25rem; position: relative;
+    }
+    .page-hero h1 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--clr-white); font-weight: 600; line-height: 1.2;
+      margin-bottom: 0.75rem; position: relative;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--clr-gold); }
+    .page-hero .hero-sub { color: rgba(255,255,255,0.6); font-size: 0.95rem; position: relative; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--clr-gold-light);
+      border: 1px solid rgba(200,168,75,0.3);
+      color: var(--clr-muted); font-size: 0.83rem;
+      padding: 0.45rem 1rem; border-radius: 2rem; margin-bottom: 2.5rem;
+    }
+    .meta-pill strong { color: var(--clr-text); }
+
+    /* ── SECTION CARDS ── */
+    .policy-section {
+      background: var(--clr-white);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .policy-section:hover { box-shadow: var(--shadow-md); }
+    .section-title { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .section-num {
+      width: 30px; height: 30px;
+      background: var(--clr-forest); color: var(--clr-white);
+      font-size: 0.75rem; font-weight: 600; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .section-title h2 {
+      font-family: var(--ff-serif); font-size: 1.15rem;
+      font-weight: 600; color: var(--clr-forest);
+    }
+    .policy-section p { font-size: 0.93rem; color: var(--clr-text); margin-bottom: 0.65rem; }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section ul { padding-left: 1.3rem; margin: 0.5rem 0 0.65rem; }
+    .policy-section ul li { font-size: 0.93rem; color: var(--clr-text); margin-bottom: 0.45rem; }
+    .policy-section a { color: var(--clr-forest); text-decoration: underline; text-underline-offset: 2px; }
+    .policy-section a:hover { color: var(--clr-gold); }
+
+    /* ── DATA TABLE ── */
+    .data-table-wrap {
+      overflow-x: auto; margin-top: 0.75rem;
+      border-radius: 8px; border: 1px solid var(--clr-border);
+    }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .data-table thead th {
+      background: var(--clr-forest); color: var(--clr-white);
+      text-align: left; padding: 0.65rem 1rem;
+      font-weight: 500; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .data-table tbody td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--clr-border); vertical-align: top; }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(even) td { background: var(--clr-gold-light); }
+    .badge-yes {
+      display: inline-block; background: #e6f4ec; color: #1a6b3a;
+      font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 2rem;
+    }
+
+    /* ── NOTICE BOX ── */
+    .notice-box {
+      background: var(--clr-gold-light);
+      border-left: 3px solid var(--clr-gold);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.1rem; margin-top: 1rem;
+      font-size: 0.88rem; color: var(--clr-text);
+    }
+
+    /* ── CONTACT CTA ── */
+    .contact-cta {
+      background: var(--clr-forest); border-radius: var(--radius);
+      padding: 2.5rem 2rem; text-align: center;
+      margin-top: 2rem; position: relative; overflow: hidden;
+    }
+    .contact-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c8a84b' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .contact-cta h2 { font-family: var(--ff-serif); font-size: 1.4rem; color: var(--clr-white); margin-bottom: 0.5rem; position: relative; }
+    .contact-cta p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 1.25rem; position: relative; }
+    .btn-gold {
+      display: inline-block; background: var(--clr-gold);
+      color: var(--clr-forest); font-weight: 600; font-size: 0.9rem;
+      padding: 0.65rem 1.75rem; border-radius: 2rem; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; position: relative;
+    }
+    .btn-gold:hover { background: #d4b45a; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    .site-footer { background: var(--clr-forest); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; margin-top: 4rem; }
+    .footer-inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem;
+    }
+    .footer-brand .name { font-family: var(--ff-serif); font-size: 1rem; font-weight: 600; color: var(--clr-white); margin-bottom: 0.25rem; }
+    .footer-brand .tagline { font-size: 0.78rem; opacity: 0.5; margin-bottom: 0.75rem; }
+    .footer-brand p { font-size: 0.82rem; line-height: 1.6; }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clr-white); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col ul li { margin-bottom: 0.4rem; }
+    .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--clr-white); }
+    .footer-bottom {
+      max-width: 960px; margin: 2rem auto 0; padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--clr-white); }
+    .footer-malayalam { font-size: 0.78rem; opacity: 0.4; font-style: italic; }
+
+    @media (max-width: 640px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .container { padding: 2rem 1.2rem 4rem; }
+      .policy-section { padding: 1.35rem 1.25rem; }
+      .contact-cta { padding: 2rem 1.25rem; }
+      .page-hero { padding: 2.5rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="https://nammude-switzerland.netlify.app/" class="nav-brand">
+      <div class="nav-brand-logo">N</div>
+      <div class="nav-brand-text">
+        <span class="name">Nammude Switzerland</span>
+        <span class="sub">നമ്മുടെ സ്വിറ്റ്സർലൻഡ്</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="https://nammude-switzerland.netlify.app/">Home</a></li>
+      <li><a href="https://nammude-switzerland.netlify.app/malayalee-ch-events">Events</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#">Resources</a></li>
+      <li><a href="https://nammude-switzerland.netlify.app/malayalee-ch-events" class="nav-cta">+ Submit event</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-eyebrow">Legal</div>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="hero-sub">How Nammude Switzerland handles your information</p>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="container">
+
+    <div class="meta-pill">
+      <strong>Effective date:</strong>&nbsp; May 13, 2026 &nbsp;·&nbsp; Applies to the Nammude Switzerland app &amp; website
+    </div>
+
+    <!-- 1 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">1</div><h2>Who We Are</h2></div>
+      <p>Nammude Switzerland (നമ്മുടെ സ്വിറ്റ്സർലൻഡ്) is a volunteer-run community platform for Malayalees living in Switzerland. We provide an events calendar, community board, and resources directory to help members stay connected and informed.</p>
+      <p>This Privacy Policy applies to both our website at <strong>nammude-switzerland.netlify.app</strong> and our Android app available on Google Play.</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">2</div><h2>What Data We Collect</h2></div>
+      <p>We only collect information you voluntarily provide when submitting an event through our event submission form.</p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Data</th><th>Why we collect it</th><th>Required</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Event name</td><td>To display the event on the calendar</td><td><span class="badge-yes">Yes</span></td></tr>
+            <tr><td>Event date &amp; time</td><td>To schedule and list the event correctly</td><td><span class="badge-yes">Yes</span></td></tr>
+            <tr><td>Event location</td><td>To inform community members where to attend</td><td><span class="badge-yes">Yes</span></td></tr>
+            <tr><td>Event description</td><td>To provide context and details about the event</td><td><span class="badge-yes">Yes</span></td></tr>
+            <tr><td>Organiser name / contact</td><td>For admin review and follow-up if needed</td><td><span class="badge-yes">Yes</span></td></tr>
+            <tr><td>Event category</td><td>To filter and categorise events correctly</td><td><span class="badge-yes">Yes</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice-box">
+        We do <strong>not</strong> collect your name, email address, phone number, device identifiers, location data, or any other personal data beyond what you choose to enter in the event submission form.
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">3</div><h2>How We Use Your Data</h2></div>
+      <p>Information submitted through the event form is used solely to:</p>
+      <ul>
+        <li>Review and approve events before publishing them to the community calendar</li>
+        <li>Display approved events publicly on the Nammude Switzerland platform</li>
+        <li>Contact the organiser if clarification is needed about the submission</li>
+      </ul>
+      <p>We do not use your data for marketing, advertising, or any purpose beyond managing the community events calendar.</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">4</div><h2>Data Storage</h2></div>
+      <p>Submitted event data is stored in a <strong>Google Sheet</strong> managed by the Nammude Switzerland team. Google's infrastructure is used to process and store this data, and is subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</p>
+      <p>Approved and published events become publicly visible on the platform. Rejected or pending submissions are retained for administrative review only and are not made public.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">5</div><h2>Third-Party Services</h2></div>
+      <p>We use the following third-party services to operate the platform:</p>
+      <ul>
+        <li><strong>Google Analytics</strong> — Used to understand how visitors use our website (page views, traffic sources). This may collect anonymised usage data. You can opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.</li>
+        <li><strong>Google Sheets &amp; Apps Script</strong> — Used as our backend to receive, store, and manage event submissions.</li>
+        <li><strong>Netlify</strong> — Our website hosting provider. Netlify may collect standard server logs (IP addresses, request times) as part of normal hosting operations.</li>
+      </ul>
+      <p>We do not sell, rent, or share your personal data with any third party for commercial purposes.</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">6</div><h2>Cookies</h2></div>
+      <p>Our website may use cookies set by Google Analytics to track anonymous usage statistics. No other cookies are set by us. You can disable cookies in your browser settings at any time without affecting your ability to use the platform.</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">7</div><h2>Children's Privacy</h2></div>
+      <p>Nammude Switzerland is a general community platform not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has submitted personal data through our platform, please contact us so we can remove it promptly.</p>
+    </div>
+
+    <!-- 8 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">8</div><h2>Your Rights</h2></div>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Request access to any personal data you have submitted</li>
+        <li>Request correction or deletion of your submitted event data</li>
+        <li>Withdraw consent for your event to be displayed publicly</li>
+      </ul>
+      <p>To exercise any of these rights, please contact us at the email address below.</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="policy-section">
+      <div class="section-title"><div class="section-num">9</div><h2>Changes to This Policy</h2></div>
+      <p>We may update this Privacy Policy from time to time. When we do, we will revise the effective date at the top of this page. We encourage you to review this page periodically. Continued use of the platform after any changes constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="contact-cta">
+      <h2>Questions or Concerns?</h2>
+      <p>If you have any questions about this Privacy Policy or how we handle your data, reach out to us.</p>
+      <a href="mailto:malayalee.events.ch@gmail.com" class="btn-gold">malayalee.events.ch@gmail.com</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="name">Nammude Switzerland</div>
+        <div class="tagline">നമ്മുടെ സ്വിറ്റ്സർലൻഡ്</div>
+        <p>A volunteer-run community platform for Malayalees across Switzerland. Built with love, maintained by the community.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="https://nammude-switzerland.netlify.app/">Home</a></li>
+          <li><a href="https://nammude-switzerland.netlify.app/malayalee-ch-events">Events calendar</a></li>
+          <li><a href="#">Community board</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://nammude-switzerland.netlify.app/malayalee-ch-events">Submit an event</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="mailto:malayalee.events.ch@gmail.com">Contact</a></li>
+          <li><a href="privacy-policy.html" style="color:rgba(255,255,255,0.85);">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nammude Switzerland · Volunteer-run · Non-commercial</span>
+      <span class="footer-malayalam">കേരളത്തിന്റെ മണം, സ്വിസ് മലകളിൽ</span>
+    </div>
+  </footer>
+
+</body>
+</html>
